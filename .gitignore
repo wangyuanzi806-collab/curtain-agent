@@ -1,0 +1,28 @@
+# Dependencies and build output
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+
+# Local credentials; only an empty template is published
+.env*
+!.env.local.example
+
+# Local state, databases and uploaded files
+local/
+.local/
+*.db
+*.sqlite
+*.sqlite3
+.tmp/
+*.log
+*.err
+
+# Development/editor state
+.claude/
+.agent-memory/
+.vercel/
+.playwright*/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,193 @@
+[
+  {
+    "scene_id": "without_curtain_01_aframe_centered_window",
+    "split": "without_curtain",
+    "room_type": "living_room",
+    "local_path": "scenes/without_curtain/without_curtain_01_aframe_centered_window.jpg",
+    "expected_window_type": "落地窗",
+    "acceptable_window_types": [
+      "落地窗",
+      "大宽窗"
+    ],
+    "eval_enabled": true,
+    "note": "A-frame cabin with full-height glazed opening."
+  },
+  {
+    "scene_id": "without_curtain_02_clean_kitchen_window",
+    "split": "without_curtain",
+    "room_type": "kitchen",
+    "local_path": "scenes/without_curtain/without_curtain_02_clean_kitchen_window.jpg",
+    "expected_window_type": "标准窗",
+    "acceptable_window_types": [
+      "标准窗"
+    ],
+    "eval_enabled": true,
+    "note": "Single large kitchen window."
+  },
+  {
+    "scene_id": "without_curtain_03_bedroom_large_window",
+    "split": "without_curtain",
+    "room_type": "bedroom",
+    "local_path": "scenes/without_curtain/without_curtain_03_bedroom_large_window.jpg",
+    "expected_window_type": "标准窗",
+    "acceptable_window_types": [
+      "标准窗",
+      "大宽窗"
+    ],
+    "eval_enabled": true,
+    "note": "Bedroom with one dominant large window."
+  },
+  {
+    "scene_id": "without_curtain_04_livingroom_panorama_window",
+    "split": "without_curtain",
+    "room_type": "living_room",
+    "local_path": "scenes/without_curtain/without_curtain_04_livingroom_panorama_window.jpg",
+    "expected_window_type": "大宽窗",
+    "acceptable_window_types": [
+      "大宽窗",
+      "落地窗"
+    ],
+    "eval_enabled": true,
+    "note": "Panoramic horizontal opening."
+  },
+  {
+    "scene_id": "without_curtain_05_modern_window_wall",
+    "split": "without_curtain",
+    "room_type": "living_room",
+    "local_path": "scenes/without_curtain/without_curtain_05_modern_window_wall.jpg",
+    "expected_window_type": "大宽窗",
+    "acceptable_window_types": [
+      "大宽窗",
+      "落地窗"
+    ],
+    "eval_enabled": true,
+    "note": "Modern window wall facing courtyard."
+  },
+  {
+    "scene_id": "without_curtain_06_bright_bedroom_window",
+    "split": "without_curtain",
+    "room_type": "bedroom",
+    "local_path": "scenes/without_curtain/without_curtain_06_bright_bedroom_window.jpg",
+    "expected_window_type": "标准窗",
+    "acceptable_window_types": [
+      "标准窗"
+    ],
+    "eval_enabled": true,
+    "note": "Bedroom with centered conventional window."
+  },
+  {
+    "scene_id": "without_curtain_07_minimal_living_window",
+    "split": "without_curtain",
+    "room_type": "living_room",
+    "local_path": "scenes/without_curtain/without_curtain_07_minimal_living_window.jpg",
+    "expected_window_type": "落地窗",
+    "acceptable_window_types": [
+      "落地窗",
+      "大宽窗"
+    ],
+    "eval_enabled": true,
+    "note": "Tall minimal opening with strong vertical proportion."
+  },
+  {
+    "scene_id": "without_curtain_08_arched_windows_room",
+    "split": "without_curtain",
+    "room_type": "living_room",
+    "local_path": "scenes/without_curtain/without_curtain_08_arched_windows_room.jpg",
+    "expected_window_type": "拱形窗",
+    "acceptable_window_types": [
+      "拱形窗",
+      "法式门窗"
+    ],
+    "eval_enabled": true,
+    "note": "Arched top glazing above door opening."
+  },
+  {
+    "scene_id": "without_curtain_09_light_room_big_window",
+    "split": "without_curtain",
+    "room_type": "living_room",
+    "local_path": "scenes/without_curtain/without_curtain_09_light_room_big_window.jpg",
+    "expected_window_type": "大宽窗",
+    "acceptable_window_types": [
+      "大宽窗",
+      "落地窗"
+    ],
+    "eval_enabled": true,
+    "note": "Wide primary opening with low clutter."
+  },
+  {
+    "scene_id": "without_curtain_10_rustic_small_window",
+    "split": "without_curtain",
+    "room_type": "study_room",
+    "local_path": "scenes/without_curtain/without_curtain_10_rustic_small_window.jpg",
+    "expected_window_type": "小窗",
+    "acceptable_window_types": [
+      "小窗",
+      "标准窗"
+    ],
+    "eval_enabled": true,
+    "note": "Small rustic window opening."
+  },
+  {
+    "scene_id": "without_curtain_11_minimal_large_window",
+    "split": "without_curtain",
+    "room_type": "living_room",
+    "local_path": "scenes/without_curtain/without_curtain_11_minimal_large_window.jpg",
+    "expected_window_type": "落地窗",
+    "acceptable_window_types": [
+      "落地窗",
+      "大宽窗"
+    ],
+    "eval_enabled": true,
+    "note": "Large centered minimal opening."
+  },
+  {
+    "scene_id": "without_curtain_12_courtyard_window_room",
+    "split": "without_curtain",
+    "room_type": "living_room",
+    "local_path": "scenes/without_curtain/without_curtain_12_courtyard_window_room.jpg",
+    "expected_window_type": "大宽窗",
+    "acceptable_window_types": [
+      "大宽窗",
+      "落地窗"
+    ],
+    "eval_enabled": true,
+    "note": "Modern courtyard-facing wide opening."
+  },
+  {
+    "scene_id": "without_curtain_13_sliding_glass_door_room",
+    "split": "without_curtain",
+    "room_type": "living_room",
+    "local_path": "scenes/without_curtain/without_curtain_13_sliding_glass_door_room.jpg",
+    "expected_window_type": "滑门/移门",
+    "acceptable_window_types": [
+      "滑门/移门",
+      "阳台门"
+    ],
+    "eval_enabled": true,
+    "note": "Glass sliding door with exterior deck access."
+  },
+  {
+    "scene_id": "without_curtain_14_french_doors_empty_room",
+    "split": "without_curtain",
+    "room_type": "living_room",
+    "local_path": "scenes/without_curtain/without_curtain_14_french_doors_empty_room.jpg",
+    "expected_window_type": "法式门窗",
+    "acceptable_window_types": [
+      "法式门窗"
+    ],
+    "eval_enabled": true,
+    "note": "Wood mullion French doors."
+  },
+  {
+    "scene_id": "without_curtain_15_bay_window_empty_room",
+    "split": "without_curtain",
+    "room_type": "living_room",
+    "local_path": "scenes/without_curtain/without_curtain_15_bay_window_empty_room.jpg",
+    "expected_window_type": "飘窗",
+    "acceptable_window_types": [
+      "飘窗"
+    ],
+    "eval_enabled": true,
+    "note": "Classic bay window geometry."
+  }
+]

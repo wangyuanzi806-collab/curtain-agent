@@ -1,0 +1,548 @@
+{
+  "generated_at": "2026-03-10T12:33:41.866Z",
+  "model": "qwen3-vl-flash",
+  "summary": {
+    "total_scenes": 15,
+    "window_type_correct": 15,
+    "has_relevant_recommendation": 15,
+    "all_recommendations_relevant": 15
+  },
+  "results": [
+    {
+      "scene_id": "without_curtain_01_aframe_centered_window",
+      "local_path": "scenes/without_curtain/without_curtain_01_aframe_centered_window.jpg",
+      "expected_window_type": "落地窗",
+      "acceptable_window_types": [
+        "落地窗",
+        "大宽窗"
+      ],
+      "inferred_window_type": "落地窗",
+      "reasoning": "图片展示的是一个A字形屋顶的室内空间，正面是一整面由多块玻璃组成的大型落地窗，从地面一直延伸到屋顶结构，视野开阔，窗外是森林景观。这种窗型在功能和视觉上都属于典型的落地窗，适合采光和景观展示。",
+      "raw_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-80063833"
+      ],
+      "recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-80063833"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-80063833"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-00607881",
+        "CUR-30386538",
+        "CUR-30566577",
+        "CUR-80063833",
+        "CUR-00466715"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_02_clean_kitchen_window",
+      "local_path": "scenes/without_curtain/without_curtain_02_clean_kitchen_window.jpg",
+      "expected_window_type": "标准窗",
+      "acceptable_window_types": [
+        "标准窗"
+      ],
+      "inferred_window_type": "标准窗",
+      "reasoning": "图片中厨房区域的窗户为常规矩形窗，无明显弧度、宽幅或移门结构，窗框为黑色窄边设计，窗高约至腰部以上，宽度适中，符合‘标准窗’定义。房间为厨房（room_type_hint: kitchen），通常此类窗户尺寸较小，不涉及落地或大宽窗结构。候选SKU中优先选择适配‘标准窗’且结构兼容的选项，避免因风格或颜色推荐牺牲窗型适配。",
+      "raw_recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-30566577",
+        "CUR-00291297"
+      ],
+      "recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-80063833"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-80063833"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-80063833",
+        "CUR-00466715",
+        "CUR-40111987"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_03_bedroom_large_window",
+      "local_path": "scenes/without_curtain/without_curtain_03_bedroom_large_window.jpg",
+      "expected_window_type": "标准窗",
+      "acceptable_window_types": [
+        "标准窗",
+        "大宽窗"
+      ],
+      "inferred_window_type": "标准窗",
+      "reasoning": "图片中窗户为矩形、非落地、非大宽、无明显弧度或滑动结构，窗框为黑色窄边，窗台宽度适中，与床头高度匹配，符合标准窗的典型特征。房间为卧室，从窗型结构和空间比例判断，不属于飘窗、落地窗或阳台门等特殊窗型。",
+      "raw_recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-00623414"
+      ],
+      "recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-00623414"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-00623414"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-00607881",
+        "CUR-30386538",
+        "CUR-30566577",
+        "CUR-00291297",
+        "CUR-80063833"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_04_livingroom_panorama_window",
+      "local_path": "scenes/without_curtain/without_curtain_04_livingroom_panorama_window.jpg",
+      "expected_window_type": "大宽窗",
+      "acceptable_window_types": [
+        "大宽窗",
+        "落地窗"
+      ],
+      "inferred_window_type": "大宽窗",
+      "reasoning": "房间内有一面占据整墙的大型落地玻璃窗，窗框为深木色，结构连续且无明显分隔，视野开阔，窗外是森林景观，符合‘大宽窗’定义。右侧还有一组双开玻璃门，但主视觉焦点和功能需求来自左侧的大面积横向窗体，因此主窗型识别为‘大宽窗’。推荐窗帘时优先考虑适配此窗型的SKU，确保覆盖宽度与采光需求。",
+      "raw_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-80569026"
+      ],
+      "recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-80569026"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-80569026"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-00607881",
+        "CUR-30386538",
+        "CUR-30566577",
+        "CUR-80063833",
+        "CUR-00466715"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_05_modern_window_wall",
+      "local_path": "scenes/without_curtain/without_curtain_05_modern_window_wall.jpg",
+      "expected_window_type": "大宽窗",
+      "acceptable_window_types": [
+        "大宽窗",
+        "落地窗"
+      ],
+      "inferred_window_type": "大宽窗",
+      "reasoning": "图片中可见大面积横向玻璃窗，窗框为黑色金属框架，占据墙面较大比例，且无明显分隔或弧形结构，符合‘大宽窗’的定义。房间内家具布局开阔，窗前无遮挡，适合搭配长幅窗帘以增强空间感和采光效果。根据候选SKU的适配窗型，优先选择覆盖‘大宽窗’且长度适中的款式。",
+      "raw_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-40390733"
+      ],
+      "recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-40390733"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-40390733"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-00607881",
+        "CUR-30386538",
+        "CUR-30566577",
+        "CUR-80063833",
+        "CUR-00466715"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_06_bright_bedroom_window",
+      "local_path": "scenes/without_curtain/without_curtain_06_bright_bedroom_window.jpg",
+      "expected_window_type": "标准窗",
+      "acceptable_window_types": [
+        "标准窗"
+      ],
+      "inferred_window_type": "标准窗",
+      "reasoning": "图片中窗户为典型的多格矩形窗，窗框简洁，无明显弧度、延伸或门扇结构，符合‘标准窗’的定义。房间为卧室场景，窗帘需兼顾遮光与柔光功能，优先选择适配标准窗的SKU，避免因风格或颜色牺牲结构适配性。",
+      "raw_recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-00623414"
+      ],
+      "recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-00623414"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-00623414"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-80063833",
+        "CUR-00466715",
+        "CUR-40111987"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_07_minimal_living_window",
+      "local_path": "scenes/without_curtain/without_curtain_07_minimal_living_window.jpg",
+      "expected_window_type": "落地窗",
+      "acceptable_window_types": [
+        "落地窗",
+        "大宽窗"
+      ],
+      "inferred_window_type": "落地窗",
+      "reasoning": "从图片可见，窗户为黑色框架、横向分隔结构，视野开阔，可俯瞰城市建筑群与树木，窗台下方无明显遮挡物，整体视觉上呈现高大、通透的垂直立面特征，符合‘落地窗’的典型定义。虽然窗框有分格，但未见明显门扇或飘窗结构，排除阳台门、滑门/移门、飘窗等类型。结合房间类型提示为‘living_room’，落地窗在客厅中常见，适配性强。",
+      "raw_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-80063833"
+      ],
+      "recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-80063833"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-80063833"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-00607881",
+        "CUR-30386538",
+        "CUR-30566577",
+        "CUR-80063833",
+        "CUR-00466715"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_08_arched_windows_room",
+      "local_path": "scenes/without_curtain/without_curtain_08_arched_windows_room.jpg",
+      "expected_window_type": "拱形窗",
+      "acceptable_window_types": [
+        "拱形窗",
+        "法式门窗"
+      ],
+      "inferred_window_type": "拱形窗",
+      "reasoning": "图片中窗户具有明显的弧形顶部结构，窗格呈网格状排列，整体为典型的拱形窗设计。窗框和墙体装饰风格古典，与拱形窗的建筑语境一致。根据 normalization_rules，拱形窗不需转换，直接匹配。",
+      "raw_recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-90591003"
+      ],
+      "recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-10569218"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-10569218"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-00607881",
+        "CUR-30386538",
+        "CUR-00291297",
+        "CUR-80063833",
+        "CUR-00466715"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_09_light_room_big_window",
+      "local_path": "scenes/without_curtain/without_curtain_09_light_room_big_window.jpg",
+      "expected_window_type": "大宽窗",
+      "acceptable_window_types": [
+        "大宽窗",
+        "落地窗"
+      ],
+      "inferred_window_type": "大宽窗",
+      "reasoning": "图片中窗户为高大且横向延伸的多格玻璃窗，占据墙面较大面积，符合‘大宽窗’的定义。窗前有大型盆栽遮挡部分视野，但窗体结构本身为宽幅长窗，适合搭配长款或宽幅窗帘以保持视觉平衡。根据推荐优先窗型适配原则，应选择能覆盖整面墙、长度足够、宽度匹配的窗帘SKU。",
+      "raw_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-30566577"
+      ],
+      "recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-30566577"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-30566577"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-00607881",
+        "CUR-30386538",
+        "CUR-30566577",
+        "CUR-80063833",
+        "CUR-00466715"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_10_rustic_small_window",
+      "local_path": "scenes/without_curtain/without_curtain_10_rustic_small_window.jpg",
+      "expected_window_type": "小窗",
+      "acceptable_window_types": [
+        "小窗",
+        "标准窗"
+      ],
+      "inferred_window_type": "小窗",
+      "reasoning": "窗户尺寸明显小于常见落地窗、大宽窗或阳台门，窗框为标准双扇推拉结构，高度和宽度比例符合‘小窗’定义。房间整体为木质结构，光线从窗侧斜射，窗下无明显延伸空间，进一步佐证其非大窗型。根据任务提示，优先考虑窗型结构适配，因此推荐 SKU 必须包含‘小窗’在 window_types 中。",
+      "raw_recommended_sku_ids": [
+        "CUR-00291297",
+        "CUR-00623414",
+        "CUR-40603008"
+      ],
+      "recommended_sku_ids": [
+        "CUR-00291297",
+        "CUR-00623414",
+        "CUR-40603008"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-00291297",
+        "CUR-00623414",
+        "CUR-40603008"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-80063833",
+        "CUR-00466715",
+        "CUR-40111987"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_11_minimal_large_window",
+      "local_path": "scenes/without_curtain/without_curtain_11_minimal_large_window.jpg",
+      "expected_window_type": "落地窗",
+      "acceptable_window_types": [
+        "落地窗",
+        "大宽窗"
+      ],
+      "inferred_window_type": "落地窗",
+      "reasoning": "该场景为室内办公/休息区，正对大面积玻璃推拉门，门后是开阔的水景和城市建筑，窗户高度几乎从地面延伸至天花板，符合‘落地窗’定义。两侧配有深色窗帘，但未遮挡整体视野，说明窗型为通透、高大的落地结构。房间内双工作台对称布局，也暗示主窗为大尺寸落地窗，以提供最佳景观视野。",
+      "raw_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-80063833"
+      ],
+      "recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-80063833"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-80063833"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-00607881",
+        "CUR-30386538",
+        "CUR-30566577",
+        "CUR-80063833",
+        "CUR-00466715"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_12_courtyard_window_room",
+      "local_path": "scenes/without_curtain/without_curtain_12_courtyard_window_room.jpg",
+      "expected_window_type": "大宽窗",
+      "acceptable_window_types": [
+        "大宽窗",
+        "落地窗"
+      ],
+      "inferred_window_type": "大宽窗",
+      "reasoning": "该窗户为横向延展的大型玻璃窗，几乎占据整面墙，属于典型的‘大宽窗’。窗框极窄，无明显分隔，适合搭配长幅窗帘以保持视觉连续性。室内空间简洁现代，强调采光与视野，因此推荐适配大宽窗结构、长度足够且能覆盖全窗的窗帘SKU。",
+      "raw_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-30566577"
+      ],
+      "recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-30566577"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-10569218",
+        "CUR-30566577"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-00607881",
+        "CUR-30386538",
+        "CUR-30566577",
+        "CUR-80063833",
+        "CUR-00466715"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_13_sliding_glass_door_room",
+      "local_path": "scenes/without_curtain/without_curtain_13_sliding_glass_door_room.jpg",
+      "expected_window_type": "滑门/移门",
+      "acceptable_window_types": [
+        "滑门/移门",
+        "阳台门"
+      ],
+      "inferred_window_type": "滑门/移门",
+      "reasoning": "图片中右侧可见一扇带白色边框和玻璃分格的推拉门，通向户外露台，符合‘滑门/移门’的定义。左侧为标准窗，但主窗型应以占据视觉主导且功能重要的滑门/移门为准。根据任务要求，推荐 SKU 必须包含此窗型。",
+      "raw_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-30566577",
+        "CUR-20602137"
+      ],
+      "recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-30566577",
+        "CUR-20602137"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-30566577",
+        "CUR-20602137"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-30386538",
+        "CUR-30566577",
+        "CUR-80063833",
+        "CUR-10569218",
+        "CUR-40111987"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_14_french_doors_empty_room",
+      "local_path": "scenes/without_curtain/without_curtain_14_french_doors_empty_room.jpg",
+      "expected_window_type": "法式门窗",
+      "acceptable_window_types": [
+        "法式门窗"
+      ],
+      "inferred_window_type": "法式门窗",
+      "reasoning": "图片中可见一扇带有多个玻璃格子的木质双开门，门框为深色木制，具有典型的法式门窗设计特征——多格玻璃窗+对开门结构，且连接室外阳台或庭院，符合法式门窗的常见应用场景。虽然左侧墙上有小窗，但主视觉焦点和功能窗型是右侧的对开门结构，因此主窗型识别为‘法式门窗’。推荐时优先选择适配该窗型的 SKU，确保结构与尺寸匹配。",
+      "raw_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-80063833",
+        "CUR-40603008"
+      ],
+      "recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-80063833",
+        "CUR-00466715"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-30386538",
+        "CUR-80063833",
+        "CUR-00466715"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-30386538",
+        "CUR-80063833",
+        "CUR-00466715",
+        "CUR-10569218",
+        "CUR-40111987"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    },
+    {
+      "scene_id": "without_curtain_15_bay_window_empty_room",
+      "local_path": "scenes/without_curtain/without_curtain_15_bay_window_empty_room.jpg",
+      "expected_window_type": "飘窗",
+      "acceptable_window_types": [
+        "飘窗"
+      ],
+      "inferred_window_type": "飘窗",
+      "reasoning": "图片中可见一个带有木质窗框的凸出式窗户结构，位于房间角落，形成典型的飘窗造型。该窗体向外延伸，具有可坐靠的窗台空间，符合飘窗定义。同时，房间内无其他窗型如落地窗、法式门窗或拱形窗等特征，因此主窗型应为飘窗。",
+      "raw_recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-30386538",
+        "CUR-00291297"
+      ],
+      "recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-90591003"
+      ],
+      "relevant_recommended_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-90591003"
+      ],
+      "fallback_candidate_sku_ids": [
+        "CUR-00607881",
+        "CUR-00291297",
+        "CUR-90591003",
+        "CUR-90111980",
+        "CUR-20112011"
+      ],
+      "window_type_correct": true,
+      "has_relevant_recommendation": true,
+      "all_recommendations_relevant": true
+    }
+  ]
+}

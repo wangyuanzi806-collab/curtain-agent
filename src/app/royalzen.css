@@ -1,0 +1,1268 @@
+:root {
+  --rz-canvas: #f5f1e8;
+  --rz-surface: #fcfaf5;
+  --rz-surface-muted: #e7e0d3;
+  --rz-ink: #4a1712;
+  --rz-text: #2c2420;
+  --rz-text-muted: #6f6259;
+  --rz-text-faint: #95877b;
+  --rz-line: #d8cfc2;
+  --rz-line-strong: #b9aa9a;
+  --rz-clay: #a45a3a;
+  --rz-success: #40634d;
+  --rz-error: #9a3f35;
+  --rz-font-body: "Manrope Variable", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+  --rz-font-display: "Cormorant Garamond Variable", "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+}
+
+body {
+  background: var(--rz-canvas);
+  color: var(--rz-text);
+  font-family: var(--rz-font-body);
+}
+
+.rz-app-shell *, .rz-login-shell *, .rz-share-page *, .rz-platform-page * { box-sizing: border-box; }
+.rz-app-shell a, .rz-login-shell a, .rz-share-page a, .rz-platform-page a { text-decoration: none; }
+.rz-app-shell button, .rz-login-shell button, .rz-share-page button, .rz-platform-page button { font-family: inherit; }
+
+.rz-app-shell {
+  display: flex;
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(74, 23, 18, .025) 1px, transparent 1px),
+    var(--rz-canvas);
+  background-size: 100% 96px;
+}
+
+.rz-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 40;
+  display: flex;
+  width: 232px;
+  flex-direction: column;
+  border-right: 1px solid var(--rz-line);
+  background: rgba(252, 250, 245, .96);
+}
+
+.rz-sidebar-head { display: flex; align-items: center; justify-content: space-between; height: 80px; padding: 0 24px; border-bottom: 1px solid var(--rz-line); }
+.rz-brand { display: inline-flex; align-items: center; gap: 12px; color: var(--rz-ink); }
+.rz-brand > span:last-child { display: grid; gap: 1px; }
+.rz-brand strong { font-family: var(--rz-font-display); font-size: 23px; font-weight: 500; line-height: 1; letter-spacing: -.03em; }
+.rz-brand small { color: var(--rz-text-faint); font-size: 8px; font-weight: 600; letter-spacing: .16em; }
+.rz-brand-mark { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid var(--rz-ink); color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 13px; letter-spacing: -.04em; }
+.rz-brand-mark.is-light { border-color: rgba(255, 250, 244, .75); color: #fffaf4; }
+
+.rz-sidebar-nav { display: grid; gap: 4px; padding: 32px 16px; }
+.rz-nav-label { margin: 0 12px 12px; color: var(--rz-text-faint); font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.rz-nav-item { display: grid; grid-template-columns: 20px 1fr auto; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-left: 2px solid transparent; color: var(--rz-text-muted); font-size: 13px; font-weight: 500; transition: background-color 110ms, border-color 110ms, color 110ms; }
+.rz-nav-item:hover { background: #f3eee5; color: var(--rz-ink); }
+.rz-nav-item.is-active { border-left-color: var(--rz-ink); background: #efe8dc; color: var(--rz-ink); }
+.rz-nav-key { display: grid; width: 20px; height: 20px; place-items: center; border: 1px solid var(--rz-line); color: var(--rz-text-faint); font-size: 9px; }
+.rz-sidebar-foot { display: grid; gap: 16px; margin-top: auto; padding: 16px; border-top: 1px solid var(--rz-line); }
+.rz-workspace-switch { display: grid; grid-template-columns: 34px 1fr 16px; align-items: center; gap: 10px; padding: 10px; color: var(--rz-text); transition: background-color 110ms; }
+.rz-workspace-switch:hover { background: #f0e9de; }
+.rz-workspace-switch > span:nth-child(2), .rz-user-card > span:nth-child(2) { display: grid; gap: 2px; }
+.rz-workspace-switch small, .rz-user-card small { color: var(--rz-text-faint); font-size: 9px; letter-spacing: .03em; }
+.rz-workspace-switch strong, .rz-user-card strong { font-size: 12px; font-weight: 600; }
+.rz-workspace-icon { display: grid; width: 34px; height: 34px; place-items: center; background: var(--rz-ink); color: var(--rz-surface); }
+.rz-user-card { display: grid; grid-template-columns: 34px 1fr 32px; align-items: center; gap: 10px; padding: 8px 10px 0; border-top: 1px solid var(--rz-line); }
+.rz-avatar { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 50%; background: #d6c5b1; color: var(--rz-ink); font-size: 10px; font-weight: 600; }
+.rz-icon-button { display: grid; width: 36px; height: 36px; place-items: center; border: 0; background: transparent; color: var(--rz-text-muted); cursor: pointer; }
+.rz-icon-button:hover { background: #eee7db; color: var(--rz-ink); }
+
+.rz-app-main { min-width: 0; width: calc(100% - 232px); margin-left: 232px; }
+.rz-topbar { position: sticky; top: 0; z-index: 30; display: flex; height: 64px; align-items: center; padding: 0 32px; border-bottom: 1px solid var(--rz-line); background: rgba(245, 241, 232, .92); }
+.rz-org-switcher { position: relative; }
+.rz-org-switcher summary { display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 8px; color: var(--rz-text); font-size: 12px; font-weight: 600; cursor: pointer; list-style: none; }
+.rz-org-switcher summary::-webkit-details-marker { display: none; }
+.rz-org-switcher summary svg { transform: rotate(90deg); }
+.rz-org-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--rz-clay); }
+.rz-org-menu { position: absolute; top: 44px; left: 0; display: grid; width: 230px; padding: 8px; border: 1px solid var(--rz-line); background: var(--rz-surface); box-shadow: 0 10px 30px rgba(55, 32, 22, .1); }
+.rz-org-menu button, .rz-org-menu a { display: flex; min-height: 40px; align-items: center; justify-content: space-between; padding: 0 10px; border: 0; background: transparent; color: var(--rz-text); text-align: left; font-size: 12px; cursor: pointer; }
+.rz-org-menu button:hover, .rz-org-menu a:hover, .rz-org-menu .is-selected { background: #f0e9de; color: var(--rz-ink); }
+.rz-topbar-actions { display: flex; align-items: center; gap: 18px; margin-left: auto; }
+.rz-language-toggle { display: inline-flex; min-height: 32px; align-items: center; padding: 3px 5px; border: 1px solid var(--rz-line); border-radius: 999px; background: rgba(252, 250, 245, .72); }
+.rz-language-toggle button { display: grid; min-width: 28px; height: 24px; place-items: center; padding: 0 6px; border: 0; border-radius: 999px; background: transparent; color: var(--rz-text-muted); font-size: 10px; font-weight: 700; letter-spacing: .04em; cursor: pointer; }
+.rz-language-toggle button.is-active { background: var(--rz-ink); color: #fffaf4; }
+/* 四种语言：每颗按钮连着自己左边那道分隔线成组，第一颗不带线。
+   分隔线原先是 `.rz-language-toggle > span`，现在那一层是插槽容器，别再拿它画线 */
+.rz-language-slot { display: inline-flex; align-items: center; gap: 6px; }
+.rz-language-slot + .rz-language-slot { margin-left: 6px; }
+.rz-language-slot i { width: 1px; height: 12px; background: var(--rz-line); }
+.rz-language-toggle.is-compact { min-height: 28px; }
+.rz-language-toggle.is-compact button { min-width: 26px; height: 20px; padding: 0 5px; font-size: 8px; }
+.rz-status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--rz-success); box-shadow: 0 0 0 3px rgba(64, 99, 77, .1); }
+.rz-content { min-height: calc(100vh - 64px); }
+.rz-page { width: min(100%, 1440px); margin: 0 auto; padding: 48px; animation: rz-page-in 220ms cubic-bezier(.2, 0, 0, 1) both; }
+.rz-route-loading { min-height: calc(100vh - 72px); display: flex; align-items: center; justify-content: center; gap: 18px; color: var(--rz-ink); }
+.rz-route-loading-mark { position: relative; display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid var(--rz-line-strong); border-radius: 50%; font-family: var(--rz-font-display); font-size: 15px; letter-spacing: -.03em; }
+.rz-route-loading-mark::after { position: absolute; inset: -5px; border: 1px solid transparent; border-top-color: var(--rz-accent); border-radius: 50%; content: ""; animation: rz-route-spin .8s linear infinite; }
+.rz-route-loading div { display: grid; gap: 4px; }
+.rz-route-loading strong { font-family: var(--rz-font-display); font-size: 22px; font-weight: 500; }
+.rz-route-loading div > span { color: var(--rz-text-muted); font-size: 12px; }
+.rz-navigation-progress { position: fixed; z-index: 120; top: 14px; right: 20px; display: flex; min-width: 220px; align-items: center; gap: 11px; padding: 10px 14px; border: 1px solid rgba(73, 50, 36, .16); border-radius: 8px; background: rgba(252, 250, 245, .96); color: var(--rz-ink); box-shadow: 0 12px 36px rgba(55, 32, 22, .15); pointer-events: none; backdrop-filter: blur(12px); animation: rz-page-in 140ms ease-out both; }
+.rz-navigation-progress > span:last-child { display: grid; gap: 2px; }
+.rz-navigation-progress strong { font-size: 11px; font-weight: 650; }
+.rz-navigation-progress small { color: var(--rz-text-muted); font-size: 9px; }
+.rz-navigation-spinner { width: 18px; height: 18px; border: 2px solid var(--rz-line-strong); border-top-color: var(--rz-clay); border-radius: 50%; animation: rz-route-spin .7s linear infinite; }
+
+.rz-eyebrow { display: block; color: var(--rz-clay); font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.rz-eyebrow.is-light { color: rgba(255, 250, 244, .75); }
+.rz-page h1, .rz-flow-header h1, .rz-login-card h2, .rz-share-page h1, .rz-share-page h2, .rz-platform-page h1 { font-family: var(--rz-font-display); color: var(--rz-ink); font-weight: 400; letter-spacing: -.035em; }
+.rz-button { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 9px; padding: 0 18px; border: 1px solid transparent; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; transition: background-color 120ms, border-color 120ms, color 120ms, transform 120ms, opacity 120ms; }
+.rz-button:hover:not(:disabled) { transform: translateY(-1px); }
+.rz-button:focus-visible, .rz-nav-item:focus-visible, .rz-org-switcher summary:focus-visible { outline: 3px solid rgba(164, 90, 58, .25); outline-offset: 2px; }
+.rz-button:disabled { cursor: not-allowed; opacity: .38; }
+.rz-button-primary { background: var(--rz-ink); color: #fffaf4; }
+.rz-button-primary:hover:not(:disabled) { background: #35100d; }
+.rz-button-secondary { border-color: var(--rz-line-strong); background: var(--rz-surface); color: var(--rz-ink); }
+.rz-button-secondary:hover:not(:disabled) { border-color: var(--rz-ink); }
+.rz-button-ghost { border-color: transparent; background: transparent; color: var(--rz-text-muted); }
+.rz-button-full { width: 100%; }
+.rz-text-link { display: inline-flex; align-items: center; gap: 6px; color: var(--rz-ink); font-size: 11px; font-weight: 600; border-bottom: 1px solid rgba(74, 23, 18, .4); }
+.rz-back-link { display: flex; align-items: center; gap: 8px; width: fit-content; margin-bottom: 32px; color: var(--rz-text-muted); font-size: 11px; }
+.rz-back-link:hover { color: var(--rz-ink); }
+.rz-page-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--rz-line-strong); }
+.rz-page-heading h1 { margin: 6px 0 8px; font-size: clamp(38px, 4vw, 58px); line-height: 1; }
+.rz-page-heading p { max-width: 680px; margin: 0; color: var(--rz-text-muted); font-size: 14px; line-height: 1.65; }
+
+/* Login */
+.rz-login-shell { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(420px, .8fr); min-height: 100vh; background: var(--rz-canvas); }
+.rz-login-visual { position: relative; min-height: 720px; overflow: hidden; }
+.rz-login-visual > img { object-fit: cover; }
+.rz-login-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(31, 15, 10, .1), rgba(31, 15, 10, .22) 55%, rgba(31, 15, 10, .68)); }
+.rz-login-brand { position: absolute; top: 40px; left: 48px; color: #fffaf4; }
+.rz-login-brand strong { color: #fffaf4; }
+.rz-login-brand small { color: rgba(255, 250, 244, .65); }
+.rz-login-quote { position: absolute; left: 48px; right: 48px; bottom: 56px; max-width: 660px; color: #fffaf4; }
+.rz-login-quote h1 { margin: 12px 0 16px; color: inherit; font-family: var(--rz-font-display); font-size: clamp(46px, 5vw, 76px); font-weight: 400; line-height: .98; letter-spacing: -.045em; }
+.rz-login-quote p { max-width: 520px; margin: 0; color: rgba(255, 250, 244, .78); font-size: 14px; line-height: 1.7; }
+.rz-login-panel { position: relative; display: flex; align-items: center; justify-content: center; padding: 64px; }
+.rz-login-language { position: absolute; top: 32px; right: 40px; }
+.rz-login-card { width: min(100%, 420px); }
+.rz-login-card h2 { margin: 12px 0 8px; font-size: 48px; line-height: 1; }
+.rz-login-card > p { margin: 0 0 32px; color: var(--rz-text-muted); font-size: 13px; line-height: 1.65; }
+.rz-auth-button { display: flex; width: 100%; min-height: 56px; align-items: center; justify-content: center; gap: 12px; padding: 0 22px; border: 1px solid rgba(74, 54, 42, .2); border-radius: 12px; background: linear-gradient(180deg, #fff 0%, #fbf8f3 100%); box-shadow: 0 10px 26px rgba(55, 37, 27, .07), inset 0 1px rgba(255, 255, 255, .9); color: var(--rz-ink); font-size: 13px; font-weight: 650; letter-spacing: .005em; cursor: pointer; transition: background-color 150ms, border-color 150ms, box-shadow 150ms, opacity 150ms, transform 150ms; }
+.rz-auth-button:hover:not(:disabled) { border-color: rgba(74, 23, 18, .42); background: #fff; box-shadow: 0 14px 32px rgba(55, 37, 27, .11), inset 0 1px rgba(255, 255, 255, .95); transform: translateY(-1px); }
+.rz-auth-button:active:not(:disabled) { box-shadow: 0 6px 16px rgba(55, 37, 27, .08); transform: translateY(0) scale(.995); }
+.rz-auth-button:focus-visible { outline: 3px solid rgba(66, 133, 244, .2); outline-offset: 3px; }
+.rz-auth-button:disabled { cursor: wait; opacity: .58; }
+.rz-google-logo { width: 22px; height: 22px; flex: 0 0 auto; filter: drop-shadow(0 1px 1px rgba(32, 33, 36, .08)); }
+.rz-auth-divider { display: flex; align-items: center; gap: 12px; margin: 24px 0; color: var(--rz-text-faint); font-size: 10px; }
+.rz-auth-divider::before, .rz-auth-divider::after { content: ""; height: 1px; flex: 1; background: var(--rz-line); }
+.rz-field { display: grid; gap: 8px; }
+.rz-field > span, .rz-choice-group legend { color: var(--rz-text); font-size: 11px; font-weight: 600; }
+.rz-field > span small { color: var(--rz-text-faint); font-weight: 400; }
+.rz-field input, .rz-field textarea { width: 100%; border: 1px solid var(--rz-line); border-radius: 8px; background: var(--rz-surface); color: var(--rz-text); font: inherit; font-size: 13px; outline: none; }
+.rz-field input { height: 48px; padding: 0 14px; }
+.rz-field textarea { min-height: 104px; padding: 14px; resize: vertical; line-height: 1.6; }
+.rz-field input:focus, .rz-field textarea:focus { border-color: var(--rz-ink); box-shadow: 0 0 0 3px rgba(74, 23, 18, .07); }
+.rz-login-card .rz-button { margin-top: 16px; }
+.rz-login-feedback-region { width: 100%; }
+.rz-login-feedback { display: flex; align-items: flex-start; gap: 10px; margin: 14px 0 0; padding: 12px 14px; border: 1px solid var(--rz-line); border-radius: 9px; color: var(--rz-text); font-size: 12px; font-weight: 520; line-height: 1.55; }
+.rz-login-feedback-mark { width: 7px; height: 7px; margin-top: 6px; flex: 0 0 auto; border-radius: 50%; background: currentColor; }
+.rz-login-feedback-pending { border-color: rgba(139, 102, 63, .25); background: rgba(181, 146, 103, .09); color: #765536; }
+.rz-login-feedback-success { border-color: rgba(71, 113, 84, .27); background: rgba(82, 132, 98, .09); color: #356346; }
+.rz-login-feedback-error { border-color: rgba(164, 90, 58, .28); background: rgba(164, 90, 58, .09); color: #8b402e; }
+.rz-login-footer { position: absolute; right: 40px; bottom: 24px; margin: 0; color: var(--rz-text-faint); font-size: 9px; }
+.rz-login-alert { width: min(calc(100vw - 32px), 440px); padding: 36px; border: 1px solid var(--rz-line-strong); border-radius: 14px; background: var(--rz-surface); color: var(--rz-text); box-shadow: 0 28px 80px rgba(38, 20, 13, .28); }
+.rz-login-alert::backdrop { background: rgba(43, 30, 23, .52); backdrop-filter: blur(7px); }
+.rz-login-alert-mark { display: grid; width: 44px; height: 44px; margin-bottom: 24px; place-items: center; border: 1px solid rgba(164, 90, 58, .35); border-radius: 50%; background: rgba(164, 90, 58, .09); color: var(--rz-clay); font-family: var(--rz-font-display); font-size: 26px; }
+.rz-login-alert h3 { margin: 10px 0 12px; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 32px; font-weight: 400; letter-spacing: -.025em; }
+.rz-login-alert > p { margin: 0; color: var(--rz-text-muted); font-size: 12px; line-height: 1.75; }
+.rz-login-alert-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 28px; }
+
+/* Dashboard */
+.rz-dashboard { padding-top: 64px; }
+.rz-dashboard-hero { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 24px; padding-bottom: 48px; border-bottom: 1px solid var(--rz-line-strong); }
+.rz-dashboard-hero h1 { margin: 10px 0 8px; font-size: clamp(48px, 5vw, 72px); line-height: .96; }
+.rz-dashboard-hero p { margin: 0; color: var(--rz-text-muted); font-size: 14px; }
+.rz-hero-metrics { grid-column: 1 / -1; display: flex; gap: 64px; margin-top: 24px; }
+.rz-hero-metrics > div { display: grid; gap: 3px; }
+.rz-hero-metrics strong { font-family: var(--rz-font-display); color: var(--rz-ink); font-size: 28px; font-weight: 400; }
+.rz-hero-metrics span { color: var(--rz-text-faint); font-size: 10px; }
+.rz-workflow-strip { display: grid; grid-template-columns: 100px repeat(5, 1fr); align-items: center; gap: 0; min-height: 96px; border-bottom: 1px solid var(--rz-line); }
+.rz-workflow-label { color: var(--rz-text-faint); font-size: 10px; font-weight: 600; }
+.rz-workflow-step { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; padding: 0 16px; color: var(--rz-text-muted); border-left: 1px solid var(--rz-line); }
+.rz-workflow-step > span { color: var(--rz-clay); font-family: var(--rz-font-display); font-size: 16px; }
+.rz-workflow-step strong { font-size: 11px; font-weight: 600; }
+.rz-dashboard-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 64px; padding-top: 48px; }
+.rz-section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.rz-section-head h2 { margin: 5px 0 0; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 28px; font-weight: 400; }
+.rz-consultation-list { border-top: 1px solid var(--rz-line-strong); }
+.rz-consultation-row { display: grid; grid-template-columns: 88px minmax(180px, 1fr) 140px 90px 20px; align-items: center; gap: 16px; min-height: 112px; border-bottom: 1px solid var(--rz-line); color: var(--rz-text); transition: background-color 120ms; }
+.rz-consultation-row:hover { background: rgba(252, 250, 245, .72); }
+.rz-consultation-image { position: relative; width: 88px; height: 72px; overflow: hidden; border-radius: 8px; }
+.rz-consultation-image img { object-fit: cover; }
+.rz-consultation-copy { display: grid; gap: 3px; }
+.rz-consultation-copy small { color: var(--rz-text-faint); font-size: 9px; letter-spacing: .05em; }
+.rz-consultation-copy strong { color: var(--rz-ink); font-size: 13px; font-weight: 600; }
+.rz-consultation-copy span { color: var(--rz-text-muted); font-size: 11px; }
+.rz-consultation-state { display: flex; align-items: center; gap: 7px; color: var(--rz-text-muted); font-size: 10px; }
+.rz-consultation-state i { width: 6px; height: 6px; border-radius: 50%; background: var(--rz-clay); }
+.rz-consultation-time { color: var(--rz-text-faint); font-size: 10px; }
+.rz-task-list { border-top: 1px solid var(--rz-line-strong); }
+.rz-task-list > a { display: grid; grid-template-columns: 30px 1fr 16px; align-items: center; gap: 12px; padding: 20px 0; border-bottom: 1px solid var(--rz-line); color: var(--rz-text); }
+.rz-task-index { font-family: var(--rz-font-display); color: var(--rz-clay); font-size: 18px; }
+.rz-task-list a > span:nth-child(2) { display: grid; gap: 4px; }
+.rz-task-list strong { font-size: 11px; font-weight: 600; }
+.rz-task-list small { color: var(--rz-text-faint); font-size: 9px; }
+.rz-service-note { margin-top: 32px; padding: 20px; border: 1px solid var(--rz-line); background: rgba(252, 250, 245, .6); }
+.rz-service-note > div { display: flex; align-items: center; gap: 8px; }
+.rz-service-note strong { font-size: 11px; }
+.rz-service-note p { margin: 12px 0; color: var(--rz-text-muted); font-size: 10px; line-height: 1.6; }
+.rz-service-note a { color: var(--rz-ink); font-size: 10px; border-bottom: 1px solid var(--rz-ink); }
+
+/* Consultation flow */
+/* 用双 class 提特异性，别改回 `.rz-flow-page`。
+   底部那条操作条是 fixed 的，这里的 padding-bottom 是给它让出的位置。而 `.rz-page`
+   在 1180 / 700 两个断点里都用 padding 简写重设过内边距——同特异性、写在后面，
+   会把这份底部留白连带清掉，最后一屏的按钮就压在操作条底下点不着。 */
+.rz-page.rz-flow-page { max-width: 1320px; padding-bottom: 140px; animation: rz-page-fade 220ms cubic-bezier(.2, 0, 0, 1) both; }
+.rz-flow-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.rz-flow-header h1 { margin: 8px 0 6px; font-size: 48px; line-height: 1; }
+.rz-flow-header p { margin: 0; color: var(--rz-text-muted); font-size: 13px; }
+.rz-draft-state { padding: 7px 10px; border: 1px solid var(--rz-line); color: var(--rz-text-faint); font-size: 9px; }
+.rz-stepper { display: grid; grid-template-columns: repeat(5, 1fr); margin: 40px 0 32px; border-top: 1px solid var(--rz-line); border-bottom: 1px solid var(--rz-line); }
+.rz-stepper button { position: relative; display: flex; min-height: 64px; align-items: center; gap: 10px; padding: 0 16px; border: 0; border-right: 1px solid var(--rz-line); background: transparent; color: var(--rz-text-faint); text-align: left; cursor: pointer; }
+.rz-stepper button:last-child { border-right: 0; }
+.rz-stepper button > span { display: grid; width: 24px; height: 24px; place-items: center; border: 1px solid var(--rz-line); border-radius: 50%; font-size: 9px; }
+.rz-stepper button strong { font-size: 10px; font-weight: 600; }
+.rz-stepper button.is-active { color: var(--rz-ink); background: rgba(252, 250, 245, .62); }
+.rz-stepper button.is-active::after { position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; background: var(--rz-ink); content: ""; }
+.rz-stepper button.is-active > span, .rz-stepper button.is-complete > span { border-color: var(--rz-ink); background: var(--rz-ink); color: #fffaf4; }
+.rz-stepper button.is-complete { color: var(--rz-text); }
+.rz-flow-surface { min-height: 550px; border: 1px solid var(--rz-line); background: rgba(252, 250, 245, .72); }
+.rz-flow-grid { display: grid; grid-template-columns: minmax(300px, .72fr) minmax(420px, 1.28fr); min-height: 550px; }
+.rz-flow-copy { max-width: 580px; }
+.rz-flow-grid > .rz-flow-copy { padding: 64px 48px; }
+.rz-step-count { display: block; margin-bottom: 24px; color: var(--rz-clay); font-family: var(--rz-font-display); font-size: 16px; }
+.rz-flow-copy h2 { margin: 0 0 12px; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 36px; font-weight: 400; line-height: 1.08; letter-spacing: -.025em; }
+.rz-flow-copy p { margin: 0; color: var(--rz-text-muted); font-size: 13px; line-height: 1.7; }
+.rz-photo-guidance { display: grid; gap: 20px; margin: 40px 0 0; padding: 0; list-style: none; }
+.rz-photo-guidance li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; color: var(--rz-ink); }
+.rz-photo-guidance li span { display: grid; gap: 3px; color: var(--rz-text-muted); font-size: 10px; line-height: 1.5; }
+.rz-photo-guidance strong { color: var(--rz-text); font-size: 11px; font-weight: 600; }
+.rz-scene-upload { position: relative; min-height: 550px; border-left: 1px solid var(--rz-line); background: #e9e2d6; overflow: hidden; }
+.rz-scene-upload.has-image img { width: 100%; height: 100%; min-height: 550px; object-fit: cover; }
+.rz-upload-empty { position: absolute; inset: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px dashed var(--rz-line-strong); text-align: center; }
+.rz-upload-icon { display: grid; width: 52px; height: 52px; margin-bottom: 20px; place-items: center; border: 1px solid var(--rz-line-strong); border-radius: 50%; color: var(--rz-ink); }
+.rz-upload-empty strong { font-family: var(--rz-font-display); color: var(--rz-ink); font-size: 22px; font-weight: 400; }
+.rz-upload-empty p { margin: 8px 0 24px; color: var(--rz-text-muted); font-size: 10px; }
+.rz-upload-empty label { cursor: pointer; }
+.rz-upload-empty input, .rz-scene-actions input { display: none; }
+.rz-demo-link { margin-top: 16px; border: 0; border-bottom: 1px solid var(--rz-ink); background: transparent; color: var(--rz-ink); font-size: 10px; cursor: pointer; }
+.rz-scene-actions { position: absolute; right: 16px; bottom: 16px; display: flex; gap: 8px; }
+.rz-scene-actions label, .rz-scene-actions button { display: flex; min-height: 38px; align-items: center; gap: 7px; padding: 0 12px; border: 1px solid rgba(255,255,255,.5); border-radius: 8px; background: rgba(44,36,32,.82); color: #fff; font-size: 10px; cursor: pointer; }
+.rz-analysis-step, .rz-preference-step, .rz-recommendation-step, .rz-preview-step { padding: 48px; }
+.rz-analysis-layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(340px, .75fr); gap: 32px; margin-top: 32px; }
+.rz-analysis-image { position: relative; min-height: 430px; overflow: hidden; border-radius: 8px; }
+.rz-analysis-image img { width: 100%; height: 100%; min-height: 430px; object-fit: cover; }
+.rz-analysis-image > span { position: absolute; top: 16px; left: 16px; display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: rgba(74,23,18,.86); color: #fffaf4; font-size: 10.5px; }
+.rz-analysis-results { display: grid; gap: 20px; }
+.rz-analysis-primary { padding: 24px; border-top: 2px solid var(--rz-ink); background: #eee7db; }
+/* 标签一律 10.5px + 字距，正文一律 15px：这一页此前 9px 标签和 11px 正文挨在一起，
+   两档只差 2px，客户看不出哪句是结论、哪句是佐证。层级靠字号差和颜色差撑开，不是靠都写小。 */
+.rz-analysis-primary > span { color: var(--rz-text-muted); font-size: 10.5px; font-weight: 600; letter-spacing: .1em; }
+.rz-analysis-primary strong { display: block; margin: 8px 0; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 26px; font-weight: 400; }
+.rz-analysis-primary p { color: var(--rz-text-muted); font-size: 15px; line-height: 1.7; }
+.rz-analysis-primary button { padding: 0; border: 0; border-bottom: 1px solid var(--rz-ink); background: transparent; color: var(--rz-ink); font-size: 9px; cursor: pointer; }
+.rz-analysis-results dl { display: grid; grid-template-columns: 1fr 1fr; margin: 0; border-top: 1px solid var(--rz-line); }
+.rz-analysis-results dl div { padding: 18px 0; border-bottom: 1px solid var(--rz-line); }
+.rz-analysis-results dl div:nth-child(odd) { padding-right: 16px; border-right: 1px solid var(--rz-line); }
+.rz-analysis-results dl div:nth-child(even) { padding-left: 16px; }
+/* 场景描述是一整段话，挤在半列里只有 160px 宽，读起来每行不到十个字 */
+.rz-analysis-results dl div.rz-analysis-full { grid-column: 1 / -1; padding-right: 0; border-right: 0; }
+.rz-analysis-results dt { margin-bottom: 7px; color: var(--rz-text-muted); font-size: 10.5px; font-weight: 600; letter-spacing: .1em; }
+.rz-analysis-results dd { margin: 0; color: var(--rz-text); font-size: 15px; line-height: 1.7; }
+.rz-analysis-results dd i { display: inline-block; width: 10px; height: 10px; margin-right: 4px; border-radius: 50%; vertical-align: -1px; }
+.rz-analysis-results dd i:nth-of-type(2) { margin-left: 10px; }
+.is-oak { background: #bd9667; }.is-cream { background: #eee5d3; border: 1px solid #cfc4b2; }
+/* 单栏。此前是两列，而这一步有三个子元素（标题、房间类型、问卷），
+   问卷被挤到第二行第一列只剩 260px 宽，右侧 465px 空着，客户要滚 3 屏。 */
+.rz-preference-step { display: grid; gap: 24px; }
+.rz-preference-form { display: grid; gap: 32px; }
+.rz-choice-group { margin: 0; padding: 0; border: 0; }
+.rz-choice-group legend { margin-bottom: 12px; }
+.rz-choice-group > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.rz-choice-group button { display: flex; min-height: 40px; align-items: center; gap: 5px; padding: 0 14px; border: 1px solid var(--rz-line); border-radius: 8px; background: var(--rz-surface); color: var(--rz-text-muted); font-size: 10px; cursor: pointer; }
+.rz-choice-group button:hover { border-color: var(--rz-line-strong); color: var(--rz-text); }
+.rz-choice-group button.is-selected { border-color: var(--rz-ink); background: var(--rz-ink); color: #fffaf4; }
+.rz-recommendation-head, .rz-preview-head { display: flex; align-items: end; justify-content: space-between; gap: 32px; }
+.rz-ai-rationale { display: grid; grid-template-columns: 24px 1fr; gap: 12px; max-width: 460px; padding: 18px 20px; border-left: 2px solid var(--rz-clay); background: #eee7db; color: var(--rz-clay); }
+.rz-ai-rationale span { display: grid; gap: 6px; color: var(--rz-text); font-size: 15px; line-height: 1.7; }
+.rz-ai-rationale strong { color: var(--rz-text-muted); font-size: 10.5px; font-weight: 600; letter-spacing: .1em; }
+.rz-product-recommendations { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+.rz-product-recommendations > button { position: relative; display: grid; padding: 0 0 20px; overflow: hidden; border: 1px solid var(--rz-line); border-radius: 8px; background: var(--rz-surface); color: var(--rz-text); text-align: left; cursor: pointer; transition: border-color 120ms, transform 120ms; }
+.rz-product-recommendations > button:hover { transform: translateY(-2px); border-color: var(--rz-line-strong); }
+.rz-product-recommendations > button.is-selected { border-color: var(--rz-ink); box-shadow: 0 0 0 1px var(--rz-ink); }
+.rz-product-image { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; }
+.rz-product-image img { object-fit: cover; }
+.rz-product-image i { position: absolute; top: 10px; left: 10px; padding: 6px 8px; background: var(--rz-ink); color: #fffaf4; font-size: 8px; font-style: normal; }
+/* 序号压到图片角上。它此前独占一整行，一张卡就为了两个字白掉四十来像素 */
+.rz-product-order { position: absolute; top: 10px; left: 10px; z-index: 2; margin: 0; padding: 2px 8px; background: rgba(252, 250, 245, .9); color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 14px; }
+.rz-product-copy { display: grid; gap: 1px; padding: 12px 16px 0; }
+.rz-product-copy small { color: var(--rz-text-muted); font-size: 10.5px; letter-spacing: .06em; }
+.rz-product-copy strong { color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 18px; font-weight: 400; line-height: 1.3; }
+/* 这里原本有一条 `.rz-product-copy > span { font-size: 9px }`。它唯一命中的就是
+   `.rz-product-reason`，而特异性 (0,1,1) 压过 (0,1,0)——推荐理由那三段于是全被压成
+   9px 同色，文件下方给它们写的字号和配色一行都没生效。删掉它，样式才轮得到下面那组。 */
+.rz-product-copy p { min-height: 46px; margin: 12px 0 0; color: var(--rz-text-muted); font-size: 13.5px; line-height: 1.65; }
+.rz-select-mark { position: absolute; right: 14px; bottom: 14px; display: grid; min-width: 34px; height: 34px; padding: 0 6px; place-items: center; border: 1px solid var(--rz-line); border-radius: 999px; color: var(--rz-text-muted); font-size: 10.5px; }
+.is-selected > .rz-select-mark { border-color: var(--rz-ink); background: var(--rz-ink); color: #fffaf4; }
+.rz-quality-picker { display: flex; align-items: center; gap: 6px; }
+.rz-quality-picker > span { margin-right: 4px; color: var(--rz-text-faint); font-size: 9px; }
+.rz-quality-picker button { min-height: 34px; padding: 0 11px; border: 1px solid var(--rz-line); border-radius: 8px; background: transparent; color: var(--rz-text-muted); font-size: 9px; cursor: pointer; }
+.rz-quality-picker button.is-selected { border-color: var(--rz-ink); background: var(--rz-ink); color: #fffaf4; }
+.rz-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
+.rz-comparison figure { margin: 0; }
+.rz-comparison figure > div { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 8px; background: #ddd; }
+.rz-comparison img { object-fit: cover; }
+.rz-comparison figcaption { display: flex; justify-content: space-between; padding: 10px 2px; color: var(--rz-text-muted); font-size: 9px; }
+.rz-comparison figcaption span { color: var(--rz-clay); font-weight: 600; letter-spacing: .1em; }
+.rz-preview-summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 20px; border-top: 1px solid var(--rz-line); }
+.rz-preview-summary > div { display: flex; align-items: center; gap: 10px; }
+.rz-preview-summary > div > span:last-child { display: grid; gap: 2px; }
+.rz-preview-summary small { color: var(--rz-text-faint); font-size: 8px; }
+.rz-preview-summary strong { font-size: 11px; }
+.rz-preview-summary p { color: var(--rz-text-muted); font-size: 9px; }
+.rz-swatch { width: 28px; height: 28px; border-radius: 50%; }.rz-swatch.is-beige { background: #c9b49a; }
+.rz-flow-actions { position: fixed; right: 0; bottom: 0; left: 232px; z-index: 25; display: grid; grid-template-columns: 1fr auto 1fr; min-height: 80px; align-items: center; padding: 0 48px; border-top: 1px solid var(--rz-line); background: rgba(245, 241, 232, .96); }
+.rz-flow-actions > .rz-button:first-child { justify-self: start; }
+.rz-flow-actions > span { color: var(--rz-text-faint); font-size: 9px; }
+.rz-flow-actions > .rz-button:last-child, .rz-final-actions { justify-self: end; }
+.rz-final-actions { display: flex; gap: 8px; }
+
+/* Catalog, material, knowledge, history */
+.rz-catalog-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 32px; }
+.rz-search { display: flex; width: min(420px, 100%); height: 44px; align-items: center; gap: 10px; padding: 0 14px; border: 1px solid var(--rz-line); border-radius: 8px; background: var(--rz-surface); color: var(--rz-text-faint); }
+.rz-search input { flex: 1; border: 0; outline: 0; background: transparent; color: var(--rz-text); font: inherit; font-size: 11px; }
+.rz-filter-row { display: flex; gap: 6px; }
+.rz-filter-row button { min-height: 36px; padding: 0 12px; border: 1px solid var(--rz-line); border-radius: 8px; background: transparent; color: var(--rz-text-muted); font-size: 9px; cursor: pointer; }
+.rz-filter-row button.is-selected { border-color: var(--rz-ink); background: var(--rz-ink); color: #fffaf4; }
+.rz-product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 16px; }
+.rz-catalog-card { min-width: 0; }
+.rz-catalog-image { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 8px; background: #e4ddd2; }
+.rz-catalog-image img { object-fit: cover; transition: transform 320ms cubic-bezier(.2,0,0,1); }
+.rz-catalog-card:hover .rz-catalog-image img { transform: scale(1.025); }
+.rz-catalog-image > span { position: absolute; top: 10px; left: 10px; padding: 6px 8px; background: #8c642f; color: #fff; font-size: 8px; }
+.rz-catalog-image > span.is-ready { background: var(--rz-success); }
+.rz-catalog-copy { padding: 14px 2px 0; }
+.rz-catalog-copy small { color: var(--rz-text-faint); font-size: 8px; letter-spacing: .05em; }
+.rz-catalog-copy h3 { margin: 4px 0; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 21px; font-weight: 400; }
+.rz-catalog-copy p { margin: 0 0 8px; color: var(--rz-text-muted); font-size: 10px; }
+.rz-catalog-copy > span { display: flex; align-items: center; gap: 6px; color: var(--rz-text-faint); font-size: 9px; }
+.rz-catalog-image > span.is-offline { background: var(--rz-text-faint); }
+.rz-catalog-card.is-offline .rz-catalog-image img { filter: grayscale(1); opacity: .55; }
+.rz-catalog-noimage { position: absolute; inset: 0; display: grid; place-items: center;
+  background: var(--rz-surface-muted) !important; color: var(--rz-text-faint) !important;
+  font-size: 11px !important; padding: 0 !important; top: 0 !important; left: 0 !important; }
+.rz-catalog-action { min-height: 32px; padding: 0 14px; cursor: pointer; font-size: 11px;
+  border: 1px solid var(--rz-line); border-radius: 999px; background: transparent; color: var(--rz-text-muted); }
+.rz-catalog-action:hover:not(:disabled) { border-color: var(--rz-ink); color: var(--rz-ink); }
+.rz-catalog-action.is-offline { border-color: var(--rz-ink); background: var(--rz-ink); color: #fffaf4; }
+.rz-catalog-action:disabled { opacity: .5; cursor: progress; }
+
+/* ---- 标签筛选（前台目录与后台管理共用） ----
+   五组标签横着列，组内可多选。每个标签后面写着「按当前其余条件还剩多少款」，
+   数字为 0 的标签直接不出现——点进去必然空手而归。 */
+.rz-facets { display: grid; gap: 10px; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--rz-line); }
+.rz-facet-group { display: grid; grid-template-columns: 40px minmax(0, 1fr); align-items: start; gap: 12px; }
+.rz-facet-label { padding-top: 7px; color: var(--rz-text-faint); font-size: 10px; font-weight: 600; letter-spacing: .08em; }
+.rz-facet-values { display: flex; flex-wrap: wrap; gap: 6px; }
+.rz-facet-values button, .rz-facet-toggle {
+  display: inline-flex; align-items: center; gap: 5px; min-height: 30px; padding: 0 11px; cursor: pointer;
+  border: 1px solid var(--rz-line); border-radius: 999px; background: var(--rz-surface);
+  color: var(--rz-text-muted); font-size: 12px; }
+.rz-facet-values button:hover, .rz-facet-toggle:hover { border-color: var(--rz-line-strong); color: var(--rz-text); }
+.rz-facet-values button.is-selected, .rz-facet-toggle.is-selected {
+  border-color: var(--rz-ink); background: var(--rz-ink); color: #fffaf4; }
+.rz-facet-values button i, .rz-facet-toggle i { font-style: normal; font-size: 10px; opacity: .62; }
+.rz-facet-clear { justify-self: start; padding: 5px 12px; cursor: pointer; font-size: 11.5px;
+  border: 1px dashed var(--rz-line); border-radius: 999px; background: transparent; color: var(--rz-text-muted); }
+.rz-facet-clear:hover { border-color: var(--rz-ink); color: var(--rz-ink); }
+.rz-catalog-count { flex: 0 0 auto; color: var(--rz-text-faint); font-size: 12px; white-space: nowrap; }
+/* 编号旁边跟一个真实色块和色号：顾问报色号比形容「有点米又有点灰」准得多 */
+.rz-catalog-hex { display: inline-flex; align-items: center; gap: 4px; margin-left: 8px; letter-spacing: .02em; }
+.rz-catalog-hex i { width: 9px; height: 9px; border-radius: 2px; border: 1px solid rgba(0,0,0,.12); }
+
+/* ---- 面料库 ----
+   格子比商品目录大一档：这一页是拿来看织纹的，看不清就失去意义。 */
+.rz-fabric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 18px; }
+.rz-fabric-card { min-width: 0; }
+.rz-fabric-image { position: relative; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 8px; background: var(--rz-surface-muted); }
+.rz-fabric-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.rz-fabric-image > span { position: absolute; top: 10px; left: 10px; padding: 4px 8px; border-radius: 4px;
+  background: rgba(44,36,32,.72); color: #fffaf4; font-size: 9px; }
+.rz-fabric-copy { padding: 12px 2px 0; }
+.rz-fabric-copy small { display: flex; align-items: center; color: var(--rz-text-faint); font-size: 9px; letter-spacing: .05em; }
+.rz-fabric-copy h3 { margin: 5px 0 4px; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 20px; font-weight: 400; }
+.rz-fabric-copy p { margin: 0; color: var(--rz-text-muted); font-size: 11px; line-height: 1.5; }
+.rz-empty-state { display: grid; justify-items: center; gap: 8px; padding: 72px; border: 1px solid var(--rz-line); color: var(--rz-text-faint); text-align: center; }
+.rz-empty-state strong { color: var(--rz-ink); font-size: 13px; }.rz-empty-state p { margin: 0; font-size: 10px; }.rz-empty-state button { border: 0; border-bottom: 1px solid var(--rz-ink); background: transparent; color: var(--rz-ink); font-size: 10px; cursor: pointer; }
+.rz-material-intro { display: grid; grid-template-columns: 160px 200px 1fr; align-items: center; margin-bottom: 40px; padding: 20px 0; border-top: 1px solid var(--rz-line); border-bottom: 1px solid var(--rz-line); }
+.rz-material-intro span, .rz-material-intro p { color: var(--rz-text-muted); font-size: 10px; }.rz-material-intro strong { color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 22px; font-weight: 400; }.rz-material-intro p { margin: 0; }
+.rz-material-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px 16px; }
+.rz-material-image { position: relative; aspect-ratio: 1 / 1.15; overflow: hidden; border-radius: 8px; background: #ddd; }.rz-material-image img { object-fit: cover; }.rz-material-image > span { position: absolute; right: 10px; bottom: 8px; color: rgba(255,255,255,.85); font-family: var(--rz-font-display); font-size: 20px; }
+.rz-material-grid article > small { display: block; margin-top: 14px; color: var(--rz-clay); font-size: 8px; letter-spacing: .08em; text-transform: uppercase; }.rz-material-grid h2 { margin: 4px 0 8px; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 22px; font-weight: 400; }.rz-material-grid article > p { min-height: 48px; margin: 0; color: var(--rz-text-muted); font-size: 10px; line-height: 1.6; }.rz-material-grid dl { display: grid; grid-template-columns: 1fr 1fr; margin: 16px 0 0; padding-top: 12px; border-top: 1px solid var(--rz-line); }.rz-material-grid dt { color: var(--rz-text-faint); font-size: 8px; }.rz-material-grid dd { margin: 3px 0 0; color: var(--rz-text); font-size: 9px; }
+.rz-tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }.rz-tag-row span { padding: 5px 10px; border: 1px solid var(--rz-line); border-radius: 999px; color: var(--rz-text-muted); font-size: 11px; }
+.rz-knowledge-layout { display: grid; grid-template-columns: 310px 1fr; gap: 64px; }.rz-knowledge-layout > aside { align-self: start; padding: 24px; border-top: 2px solid var(--rz-ink); background: #ece5d9; }.rz-knowledge-layout aside h2 { margin: 12px 0; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 28px; font-weight: 400; line-height: 1.12; }.rz-knowledge-layout aside p { color: var(--rz-text-muted); font-size: 10px; line-height: 1.6; }.rz-knowledge-layout aside dl { display: flex; gap: 32px; margin: 28px 0 0; padding-top: 16px; border-top: 1px solid var(--rz-line); }.rz-knowledge-layout aside dt { color: var(--rz-text-faint); font-size: 8px; }.rz-knowledge-layout aside dd { margin: 4px 0 0; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 24px; }
+.rz-article-list { border-top: 1px solid var(--rz-line-strong); }.rz-article-list article { display: grid; grid-template-columns: 80px 1fr 32px; align-items: start; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--rz-line); }.rz-article-list article > span { color: var(--rz-clay); font-family: var(--rz-font-display); font-size: 14px; }.rz-article-list small { color: var(--rz-text-faint); font-size: 8px; }.rz-article-list h3 { margin: 4px 0 6px; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 22px; font-weight: 400; }.rz-article-list p { margin: 0; color: var(--rz-text-muted); font-size: 10px; line-height: 1.6; }.rz-article-list button { display: grid; width: 32px; height: 32px; place-items: center; border: 0; background: transparent; color: var(--rz-text-faint); cursor: pointer; }
+.rz-history-list { border-top: 1px solid var(--rz-line-strong); }.rz-history-list > a, .rz-history-list > button { display: grid; grid-template-columns: 120px 150px minmax(180px, 1fr) minmax(180px, 1fr) 20px; align-items: center; gap: 20px; min-height: 112px; border: 0; border-bottom: 1px solid var(--rz-line); background: transparent; color: var(--rz-text); font: inherit; text-align: left; width: 100%; }.rz-history-list > button { cursor: pointer; }.rz-history-list > a:hover, .rz-history-list > button:hover { background: rgba(252,250,245,.65); }
+/* 整理模式：选中的整行压深，比在最左边塞一列小方框省一列宽度，
+   手指点哪儿都算数 */
+.rz-history-list > button.is-picked { background: #efe8dc; box-shadow: inset 3px 0 0 var(--rz-ink); }
+.rz-history-bar { display: flex; align-items: center; gap: 10px; padding: 0 0 12px; color: var(--rz-text-faint); font-size: 11px; }
+.rz-history-bar em { font-style: normal; color: var(--rz-ink); }
+.rz-history-bar button { margin-left: 0; min-height: 30px; padding: 0 12px; cursor: pointer; font-size: 11.5px;
+  border: 1px solid var(--rz-line); border-radius: 999px; background: var(--rz-surface); color: var(--rz-text-muted); }
+.rz-history-bar button:first-of-type { margin-left: auto; }
+.rz-history-bar button:hover:not(:disabled) { border-color: var(--rz-ink); color: var(--rz-ink); }
+.rz-history-bar button.is-danger { border-color: var(--rz-error); color: var(--rz-error); }
+.rz-history-bar button.is-danger:hover:not(:disabled) { background: var(--rz-error); color: #fff; }
+.rz-history-bar button:disabled { opacity: .45; cursor: default; }
+.rz-history-image { position: relative; width: 120px; height: 80px; overflow: hidden; border-radius: 8px; background: var(--rz-surface-muted); }.rz-history-image img { object-fit: cover; }.rz-history-id, .rz-history-list > * > span:nth-child(3), .rz-history-list > * > span:nth-child(4) { display: grid; gap: 5px; }.rz-history-id { color: var(--rz-clay); font-size: 10px; }.rz-history-list strong { color: var(--rz-ink); font-size: 11px; font-weight: 600; }.rz-history-list small { color: var(--rz-text-faint); font-size: 9px; }.rz-history-archive { display: flex; justify-content: space-between; padding-top: 20px; color: var(--rz-text-faint); font-size: 9px; }.rz-history-archive a { display: flex; align-items: center; gap: 6px; color: var(--rz-ink); }
+
+/* Detail and settings */
+.rz-detail-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 32px; }.rz-detail-heading h1 { margin: 8px 0 6px; font-size: 44px; line-height: 1; }.rz-detail-heading p { margin: 0; color: var(--rz-text-faint); font-size: 9px; }.rz-detail-heading > div:last-child { display: flex; gap: 8px; }
+.rz-detail-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(340px, .5fr); gap: 32px; }.rz-detail-image { position: relative; min-height: 620px; overflow: hidden; border-radius: 8px; background: #ddd; }.rz-detail-image img { object-fit: cover; }.rz-detail-image > span { position: absolute; top: 14px; left: 14px; padding: 7px 9px; background: var(--rz-ink); color: #fffaf4; font-size: 8px; }.rz-detail-thumbs { display: flex; gap: 8px; margin-top: 10px; }.rz-detail-thumbs button { position: relative; width: 88px; height: 62px; overflow: hidden; border: 1px solid transparent; border-radius: 8px; background: transparent; cursor: pointer; opacity: .65; }.rz-detail-thumbs button.is-active { border-color: var(--rz-ink); opacity: 1; }.rz-detail-thumbs img { object-fit: cover; }
+.rz-detail-panel { align-self: start; border-top: 2px solid var(--rz-ink); }.rz-detail-status { display: grid; grid-template-columns: 10px 1fr; align-items: center; column-gap: 8px; padding: 16px 0; border-bottom: 1px solid var(--rz-line); }.rz-detail-status strong { font-size: 13px; }.rz-detail-status small { grid-column: 2; color: var(--rz-text-muted); font-size: 11px; }.rz-detail-panel section { position: relative; padding: 24px 0; border-bottom: 1px solid var(--rz-line); }.rz-detail-panel h2 { margin: 8px 0 4px; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 28px; font-weight: 400; }.rz-detail-panel section > p { margin: 0; color: var(--rz-text-muted); font-size: 14px; line-height: 1.7; }.rz-detail-panel h3 { margin: 0 0 10px; color: var(--rz-text-muted); font-size: 10.5px; font-weight: 600; letter-spacing: .1em; }.rz-selected-product { position: absolute; top: 24px; right: 0; width: 72px; height: 72px; overflow: hidden; border-radius: 8px; }.rz-selected-product img { object-fit: cover; }.rz-detail-facts { display: grid; grid-template-columns: 1fr 1fr; margin: 0; border-bottom: 1px solid var(--rz-line); }.rz-detail-facts div { padding: 14px 0; }.rz-detail-facts dt { color: var(--rz-text-muted); font-size: 10.5px; font-weight: 600; letter-spacing: .1em; }.rz-detail-facts dd { margin: 5px 0 0; font-size: 14px; line-height: 1.65; }
+/* 空间描述是一整段话，挤在半列里每行不到十个字 */
+.rz-detail-facts div.rz-detail-full { grid-column: 1 / -1; }
+/* 方案页的推荐理由。和第四步卡片同一套讲法：结论 → 实测依据 → 附注，
+   免得顾问在两个页面看到同一款却是两种说法 */
+.rz-detail-reason { display: grid; gap: 8px; }
+.rz-detail-reason p { margin: 0; color: var(--rz-text); font-size: 15px; line-height: 1.7; }
+.rz-detail-reason small { color: var(--rz-text-faint); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.rz-detail-reason em {
+  font-style: normal; font-size: 13px; line-height: 1.55; color: var(--rz-text-muted);
+  padding-left: 10px; border-left: 1px solid var(--rz-line);
+}
+.rz-detail-reason em.is-caveat { border-left-color: var(--rz-line-strong); }.rz-detail-actions { display: grid; gap: 8px; padding-top: 20px; }.rz-detail-actions a, .rz-detail-actions button { min-height: 44px; border: 1px solid var(--rz-line); border-radius: 8px; background: transparent; color: var(--rz-ink); font-size: 13px; cursor: pointer; display: grid; place-items: center; }
+.rz-settings-grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 64px; }.rz-settings-grid section { display: grid; align-content: start; gap: 18px; padding: 24px; border-top: 2px solid var(--rz-ink); background: rgba(252,250,245,.65); }.rz-settings-grid h2 { margin: 0; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 26px; font-weight: 400; }.rz-settings-grid p { color: var(--rz-text-muted); font-size: 11px; line-height: 1.65; }
+
+/* Organization admin */
+.rz-admin-shell { min-height: 100vh; background: #f2eee6; color: var(--rz-text); }
+.rz-admin-sidebar { position: fixed; inset: 0 auto 0 0; z-index: 40; display: flex; width: 240px; flex-direction: column; border-right: 1px solid var(--rz-line); background: var(--rz-surface); }
+.rz-admin-org { display: flex; align-items: center; gap: 10px; margin: 20px 16px 12px; padding: 12px; background: #eee7dc; }.rz-admin-org > span:nth-child(2) { display: grid; gap: 2px; }.rz-admin-org small { color: var(--rz-text-faint); font-size: 8px; }.rz-admin-org strong { color: var(--rz-ink); font-size: 11px; font-weight: 600; }
+.rz-admin-sidebar nav { display: grid; gap: 3px; padding: 16px; }.rz-admin-sidebar nav .rz-nav-label { margin-top: 4px; }.rz-admin-sidebar nav a { display: flex; min-height: 42px; align-items: center; gap: 10px; padding: 0 12px; border-left: 2px solid transparent; color: var(--rz-text-muted); font-size: 11px; font-weight: 500; }.rz-admin-sidebar nav a:hover { background: #f2ede4; color: var(--rz-ink); }.rz-admin-sidebar nav a.is-active { border-left-color: var(--rz-ink); background: #eee7dc; color: var(--rz-ink); }
+.rz-admin-sidebar-foot { display: grid; gap: 4px; margin-top: auto; padding: 16px; border-top: 1px solid var(--rz-line); }.rz-admin-sidebar-foot a { display: flex; min-height: 38px; align-items: center; gap: 9px; padding: 0 10px; color: var(--rz-text-muted); font-size: 10px; }.rz-admin-sidebar-foot a:hover { color: var(--rz-ink); background: #f2ede4; }
+.rz-admin-main { min-width: 0; min-height: 100vh; margin-left: 240px; }.rz-admin-topbar { display: flex; height: 64px; align-items: center; gap: 10px; padding: 0 40px; border-bottom: 1px solid var(--rz-line); background: rgba(242, 238, 230, .92); color: var(--rz-text-muted); font-size: 10px; }.rz-admin-topbar > div { display: flex; align-items: center; gap: 14px; margin-left: auto; }.rz-admin-health { display: inline-flex; align-items: center; gap: 7px; }
+.rz-admin-page { width: min(100%, 1400px); margin: 0 auto; padding: 48px; animation: rz-page-in 220ms cubic-bezier(.2,0,0,1) both; }.rz-admin-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--rz-line-strong); }.rz-admin-heading h1 { margin: 7px 0; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 48px; font-weight: 400; line-height: 1; letter-spacing: -.03em; }.rz-admin-heading p { margin: 0; color: var(--rz-text-muted); font-size: 11px; }
+.rz-admin-metrics { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--rz-line-strong); border-bottom: 1px solid var(--rz-line-strong); }.rz-admin-metrics article { display: grid; min-height: 150px; align-content: center; padding: 24px; border-right: 1px solid var(--rz-line); }.rz-admin-metrics article:last-child { border-right: 0; }.rz-admin-metrics span { color: var(--rz-text-faint); font-size: 9px; }.rz-admin-metrics strong { margin: 8px 0 3px; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 34px; font-weight: 400; }.rz-admin-metrics small { color: var(--rz-text-muted); font-size: 8px; }
+.rz-admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 48px; }.rz-readiness-list, .rz-admin-tasks { border-top: 1px solid var(--rz-line-strong); }.rz-readiness-list > div { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 18px 0; border-bottom: 1px solid var(--rz-line); }.rz-readiness-list span { color: var(--rz-text-muted); font-size: 10px; }.rz-readiness-list strong { color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 18px; font-weight: 400; }.rz-readiness-list i { grid-column: 1 / -1; height: 3px; background: var(--rz-surface-muted); }.rz-readiness-list b { display: block; height: 100%; background: var(--rz-ink); }
+.rz-admin-tasks > a { display: grid; grid-template-columns: 32px 1fr 18px; align-items: center; gap: 12px; min-height: 76px; border-bottom: 1px solid var(--rz-line); color: var(--rz-text); }.rz-admin-tasks > a > span { color: var(--rz-clay); font-family: var(--rz-font-display); font-size: 18px; }.rz-admin-tasks a > div { display: grid; gap: 3px; }.rz-admin-tasks strong { font-size: 10px; }.rz-admin-tasks small { color: var(--rz-text-faint); font-size: 8px; }
+.rz-role-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 40px; }.rz-role-summary article { display: grid; grid-template-columns: 32px 1fr auto; gap: 16px; min-height: 120px; align-items: center; padding: 24px; border-top: 2px solid var(--rz-ink); background: rgba(252,250,245,.7); }.rz-role-summary article > div { display: grid; gap: 5px; }.rz-role-summary strong { color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 22px; font-weight: 400; }.rz-role-summary p { margin: 0; color: var(--rz-text-muted); font-size: 9px; }.rz-role-summary article > span { color: var(--rz-clay); font-family: var(--rz-font-display); font-size: 28px; }
+/* 这三块本来就在数各角色有几个人，点一下当筛选器用，不必再造一排按钮 */
+.rz-role-summary article { cursor: pointer; transition: background-color 120ms, border-color 120ms; }
+.rz-role-summary article:hover { background: rgba(252,250,245,1); }
+.rz-role-summary article.is-selected { border-top-color: var(--rz-clay); background: #efe8dc; }
+.rz-team-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 20px; }
+.rz-team-filters input { flex: 1 1 220px; min-width: 0; min-height: 34px; padding: 0 14px; font: inherit; font-size: 12px;
+  border: 1px solid var(--rz-line); border-radius: 999px; background: var(--rz-surface); color: var(--rz-text); }
+.rz-team-filters button { display: inline-flex; align-items: center; gap: 5px; min-height: 34px; padding: 0 13px; cursor: pointer;
+  font-size: 12px; border: 1px solid var(--rz-line); border-radius: 999px; background: var(--rz-surface); color: var(--rz-text-muted); }
+.rz-team-filters button:hover { border-color: var(--rz-line-strong); color: var(--rz-text); }
+.rz-team-filters button.is-selected { border-color: var(--rz-ink); background: var(--rz-ink); color: #fffaf4; }
+.rz-team-filters button i { font-style: normal; font-size: 10px; opacity: .62; }
+.rz-team-filters .rz-team-clear { border-style: dashed; }
+.rz-team-table { border-top: 1px solid var(--rz-line-strong); }.rz-team-table-head, .rz-team-row { display: grid; grid-template-columns: minmax(240px, 1.5fr) 1fr .7fr minmax(140px, auto); align-items: center; gap: 16px; border-bottom: 1px solid var(--rz-line); }.rz-team-table-head { min-height: 44px; color: var(--rz-text-faint); font-size: 8px; text-transform: uppercase; letter-spacing: .07em; }.rz-team-row { min-height: 76px; font-size: 10px; }.rz-team-row > span:first-child { display: flex; align-items: center; gap: 12px; }.rz-team-row > span:first-child > i { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 50%; background: #ddd2c4; color: var(--rz-ink); font-size: 9px; font-style: normal; }.rz-team-row > span:first-child > span { display: grid; gap: 3px; }.rz-team-row strong { font-size: 10px; }.rz-team-row small { color: var(--rz-text-faint); font-size: 8px; }.rz-team-row > span:nth-child(2) select { width: min(150px, 100%); border: 1px solid var(--rz-line); border-radius: 5px; background: var(--rz-surface); padding: 7px 9px; color: var(--rz-ink); font: inherit; }.rz-team-row > span:nth-child(3) { display: flex; align-items: center; gap: 7px; color: var(--rz-text-muted); }.rz-team-row > span:nth-child(3) > i { width: 6px; height: 6px; border-radius: 50%; background: #a47d43; }.rz-team-row > span:nth-child(3) > i.is-active { background: var(--rz-success); }.rz-team-row > span:nth-child(3) > i.is-disabled { background: #9a8f86; }.rz-team-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }.rz-team-actions button { width: fit-content; border: 0; border-bottom: 1px solid var(--rz-ink); background: transparent; color: var(--rz-ink); font-size: 9px; cursor: pointer; }.rz-team-actions button.is-danger { border-color: #a24735; color: #a24735; }.rz-team-actions button:disabled { cursor: wait; opacity: .5; }
+
+/* Customer share */
+.rz-share-page { min-height: 100vh; background: var(--rz-canvas); color: var(--rz-text); }
+.rz-share-nav { display: flex; min-height: 80px; align-items: center; justify-content: space-between; padding: 0 48px; border-bottom: 1px solid var(--rz-line); }.rz-share-nav > div { display: flex; align-items: center; gap: 18px; }.rz-share-nav > div > span { color: var(--rz-text-faint); font-size: 9px; }
+.rz-share-hero { display: grid; grid-template-columns: minmax(360px, .8fr) minmax(0, 1.2fr); min-height: 680px; }.rz-share-hero > div:first-child { display: flex; flex-direction: column; justify-content: center; padding: 64px 7vw; }.rz-share-hero h1 { margin: 16px 0 24px; font-size: clamp(54px, 6vw, 92px); line-height: .92; }.rz-share-hero p { max-width: 500px; margin: 0; color: var(--rz-text-muted); font-size: 14px; line-height: 1.8; }.rz-share-hero-image { position: relative; min-height: 680px; }.rz-share-hero-image img { object-fit: cover; }
+.rz-share-product { display: grid; grid-template-columns: 80px minmax(320px, .8fr) minmax(0, 1.2fr); gap: 32px; padding: 96px 7vw; background: var(--rz-surface); }.rz-share-index { color: var(--rz-clay); font-family: var(--rz-font-display); font-size: 24px; }.rz-share-product h2 { margin: 16px 0 8px; font-size: clamp(42px, 5vw, 72px); line-height: .95; }.rz-share-product p { color: var(--rz-text-muted); font-size: 12px; }.rz-share-reasons { display: grid; gap: 0; margin-top: 40px; border-top: 1px solid var(--rz-line); }.rz-share-reasons span { padding: 14px 0; border-bottom: 1px solid var(--rz-line); color: var(--rz-text); font-size: 10px; }.rz-share-product-image { position: relative; min-height: 520px; overflow: hidden; }.rz-share-product-image img { object-fit: cover; }
+.rz-share-note { max-width: 980px; margin: 0 auto; padding: 120px 48px; text-align: center; }/* 这里原本是 48px 的大字引言，配一句十来个字的场面话正合适。
+   现在放的是真正的推荐理由（八九十字），48px 会撑满整屏——调到仍有引言感、
+   又读得下一段话的尺寸。 */
+.rz-share-note blockquote { max-width: 760px; margin: 24px auto; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: clamp(21px, 2.6vw, 30px); font-weight: 400; line-height: 1.5; }
+.rz-share-note p { color: var(--rz-text-muted); font-size: 12px; }
+/* 提醒客户的话不能缩成脚注：这一条是让人信我们的地方 */
+.rz-share-note p.rz-share-caveat { max-width: 620px; margin: 0 auto 20px; color: var(--rz-text-muted); font-size: 13.5px; line-height: 1.75; }
+.rz-share-footer { display: flex; align-items: center; justify-content: space-between; padding: 48px 7vw; background: var(--rz-ink); color: #fffaf4; }.rz-share-footer strong { font-family: var(--rz-font-display); font-size: 28px; font-weight: 400; }.rz-share-footer p { margin: 4px 0 0; color: rgba(255,250,244,.65); font-size: 10px; }.rz-share-footer a { padding-bottom: 4px; border-bottom: 1px solid rgba(255,250,244,.8); color: #fffaf4; font-size: 11px; }.rz-share-disclaimer { margin: 0; padding: 16px 7vw; background: var(--rz-ink); color: rgba(255,250,244,.45); font-size: 8px; text-align: center; }
+
+/* Platform */
+.rz-platform-page { min-height: 100vh; padding: 0 6vw 80px; background: var(--rz-canvas); }.rz-platform-page > header { display: flex; height: 80px; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--rz-line); }.rz-platform-actions { display: flex; align-items: center; gap: 20px; }.rz-platform-actions > a { color: var(--rz-ink); font-size: 10px; border-bottom: 1px solid var(--rz-ink); }.rz-platform-hero { padding: 96px 0 64px; }.rz-platform-hero h1 { margin: 12px 0; font-size: clamp(54px, 7vw, 88px); line-height: .92; }.rz-platform-hero p { max-width: 620px; color: var(--rz-text-muted); font-size: 13px; line-height: 1.65; }.rz-platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rz-line-strong); }.rz-platform-grid > a { display: grid; grid-template-columns: 28px 1fr; gap: 18px; min-height: 260px; padding: 32px; border-right: 1px solid var(--rz-line); color: var(--rz-text); }.rz-platform-grid > a:last-child { border-right: 0; }.rz-platform-grid > a:hover { background: rgba(252,250,245,.72); }.rz-platform-grid span { display: grid; align-content: start; }.rz-platform-grid small { color: var(--rz-clay); font-family: var(--rz-font-display); font-size: 34px; }.rz-platform-grid strong { margin-top: 40px; color: var(--rz-ink); font-family: var(--rz-font-display); font-size: 28px; font-weight: 400; }.rz-platform-grid p { color: var(--rz-text-muted); font-size: 10px; line-height: 1.65; }
+
+/* Dynamic backend images replace Next/Image fill elements after data is loaded. */
+.rz-consultation-image img, .rz-product-image img, .rz-comparison img, .rz-catalog-image img, .rz-material-image img, .rz-history-image img, .rz-detail-image img, .rz-detail-thumbs img, .rz-selected-product img, .rz-share-hero-image img, .rz-share-product-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.rz-agent-status { display: flex; align-items: center; gap: 10px; margin: 14px 0; padding: 12px 16px; border: 1px solid rgba(115,63,45,.18); border-radius: 8px; background: #f3ebe0; color: var(--rz-ink); font-size: 10px; }
+.rz-agent-status svg { color: var(--rz-clay); animation: rz-pulse 1.4s ease-in-out infinite; }
+.rz-error-banner { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; margin: 14px 0; padding: 12px 16px; border: 1px solid rgba(142,57,46,.25); border-radius: 8px; background: #f8e9e4; color: #71382f; font-size: 10px; }
+.rz-error-banner button { border: 0; background: transparent; color: inherit; cursor: pointer; }
+.rz-share-action { display: grid; gap: 4px; }.rz-share-action small { color: var(--rz-clay); font-size: 8px; text-align: right; }
+.rz-team-invite { display: grid; grid-template-columns: 1fr 1.3fr 1fr auto; align-items: end; gap: 12px; margin: 0 0 24px; padding: 18px; border: 1px solid var(--rz-line); border-radius: 8px; background: var(--rz-surface); }
+.rz-team-invite .rz-field { margin: 0; }.rz-admin-message { margin: -8px 0 20px; color: var(--rz-clay); font-size: 10px; }
+.rz-security-page { max-width: 960px; }.rz-mfa-card { display: grid; grid-template-columns: 48px 1fr; gap: 20px; padding: clamp(24px, 4vw, 46px); border-top: 2px solid var(--rz-ink); background: rgba(252,250,245,.86); box-shadow: 0 20px 60px rgba(73,50,36,.08); }.rz-mfa-icon { display: grid; width: 46px; height: 46px; place-items: center; border-radius: 50%; background: var(--rz-ink); color: var(--rz-canvas); }.rz-mfa-copy { display: grid; gap: 7px; }.rz-mfa-copy h2 { margin: 0; font-family: var(--rz-font-display); font-size: 34px; font-weight: 400; }.rz-mfa-copy p { max-width: 650px; margin: 0; color: var(--rz-text-muted); font-size: 11px; line-height: 1.7; }.rz-mfa-state, .rz-mfa-enrollment, .rz-mfa-code, .rz-mfa-message, .rz-mfa-actions { grid-column: 2; }.rz-mfa-state { display: flex; align-items: center; gap: 12px; min-height: 70px; }.rz-mfa-enrollment { display: grid; grid-template-columns: 190px 1fr; align-items: center; gap: 24px; padding: 20px; border: 1px solid var(--rz-line); background: var(--rz-surface); }.rz-mfa-qr { display: grid; min-height: 170px; place-items: center; background: white; }.rz-mfa-qr img { width: 170px; height: 170px; }.rz-mfa-enrollment strong { font-family: var(--rz-font-display); font-size: 24px; font-weight: 400; }.rz-mfa-enrollment p { color: var(--rz-text-muted); font-size: 10px; line-height: 1.6; }.rz-mfa-enrollment code { display: block; overflow-wrap: anywhere; padding: 10px; border-radius: 4px; background: var(--rz-surface-muted); color: var(--rz-ink); font-size: 10px; }.rz-mfa-code { max-width: 280px; margin: 0; }.rz-mfa-code input { font-family: var(--rz-font-display); font-size: 28px; letter-spacing: .18em; }.rz-mfa-message { margin: 0; color: var(--rz-clay); font-size: 10px; }.rz-mfa-message.is-error { color: #a24735; }.rz-mfa-actions { display: flex; flex-wrap: wrap; gap: 10px; }.rz-mfa-actions a { text-decoration: none; }
+
+.rz-mobile-only { display: none; }
+.rz-nav-scrim { display: none; }
+
+@keyframes rz-page-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rz-page-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rz-route-spin { to { transform: rotate(360deg); } }
+@keyframes rz-pulse { 50% { opacity: .35; transform: rotate(12deg); } }
+
+@media (max-width: 1180px) {
+  .rz-page { padding: 40px 32px; }
+  .rz-dashboard-grid { grid-template-columns: 1fr; gap: 48px; }
+  .rz-dashboard-aside { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .rz-dashboard-aside .rz-section-head { grid-column: 1 / -1; margin-bottom: -12px; }
+  .rz-workflow-strip { grid-template-columns: repeat(5, 1fr); }
+  .rz-workflow-label { display: none; }
+  .rz-workflow-step { padding: 0 10px; }
+  .rz-product-grid, .rz-fabric-grid { grid-template-columns: repeat(2, 1fr); }
+  .rz-material-grid { grid-template-columns: repeat(2, 1fr); }
+  .rz-flow-grid { grid-template-columns: .8fr 1.2fr; }
+  .rz-flow-grid > .rz-flow-copy, .rz-analysis-step, .rz-preference-step, .rz-recommendation-step, .rz-preview-step { padding: 40px 32px; }
+  /* 平板横屏（1024）减掉 232px 侧栏只剩 792px，三列每列 240px、图缩到 240×180。
+     窗帘看的就是垂坠和织纹，宁可两列把图放大。 */
+  .rz-product-recommendations { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .rz-share-hero { grid-template-columns: .9fr 1.1fr; }
+}
+
+@media (max-width: 900px) {
+  .rz-mobile-only { display: grid; }
+  .rz-sidebar { transform: translateX(-100%); transition: transform 200ms cubic-bezier(.2,0,0,1); }
+  .rz-sidebar.is-open { transform: translateX(0); }
+  .rz-nav-scrim { position: fixed; inset: 0; z-index: 35; border: 0; background: rgba(31,20,16,.42); opacity: 0; pointer-events: none; transition: opacity 180ms; }
+  .rz-nav-scrim.is-open { display: block; opacity: 1; pointer-events: auto; }
+  .rz-app-main { width: 100%; margin-left: 0; }
+  .rz-admin-sidebar { transform: translateX(-100%); transition: transform 200ms cubic-bezier(.2,0,0,1); }
+  .rz-admin-sidebar.is-open { transform: translateX(0); }
+  .rz-admin-main { margin-left: 0; }
+  .rz-admin-topbar { padding: 0 20px; }
+  .rz-admin-health { display: none; }
+  .rz-admin-grid { grid-template-columns: 1fr; gap: 40px; }
+  .rz-role-summary { grid-template-columns: 1fr 1fr; }
+  .rz-topbar { padding: 0 20px; gap: 8px; }
+  .rz-flow-actions { left: 0; padding: 0 24px; }
+  .rz-login-shell { grid-template-columns: 1fr; }
+  .rz-login-visual { min-height: 440px; }
+  .rz-login-panel { min-height: 600px; padding: 64px 32px 100px; }
+  .rz-login-footer { right: 32px; }
+  .rz-login-language { top: 24px; right: 24px; }
+  .rz-flow-grid, .rz-analysis-layout, .rz-preference-step { grid-template-columns: 1fr; }
+  /* 平板上顶部这一组也偏重，先收掉副标题、标题降一档；手机端还有更狠的一份在后面 */
+  .rz-flow-header h1 { font-size: 34px; }
+  .rz-flow-header p { display: none; }
+  .rz-stepper { margin: 24px 0 20px; }
+  .rz-scene-upload { min-height: 460px; border-top: 1px solid var(--rz-line); border-left: 0; }
+  .rz-scene-upload.has-image img { min-height: 460px; }
+  /* 平板两列，图仍然在上方通栏。
+     原先这里把卡片压成「图在左、字在右」的横条：图跟着右侧文字的高度被拉长，
+     object-fit: cover 于是把 4:3 的窗帘左右两边整个裁掉，只剩中间窄窄一条。
+     卖的就是这张图，不能裁。 */
+  .rz-product-recommendations { grid-template-columns: repeat(2, 1fr); }
+  .rz-recommendation-head, .rz-preview-head { align-items: start; flex-direction: column; }
+  .rz-detail-layout { grid-template-columns: 1fr; }
+  .rz-detail-image { min-height: 520px; }
+  .rz-knowledge-layout { grid-template-columns: 1fr; gap: 32px; }
+  .rz-share-hero { grid-template-columns: 1fr; }
+  .rz-share-hero > div:first-child { min-height: 520px; }
+  .rz-share-hero-image { min-height: 520px; }
+  .rz-share-product { grid-template-columns: 48px 1fr; }.rz-share-product-image { grid-column: 2; }
+}
+
+@media (max-width: 700px) {
+  /* 四个按钮写的是各自语言的全名（"中文/English/Nederlands/Français"），
+     不是两个字母的缩写——不同语言长度天然不一样，"Nederlands" 比其它几个都长。
+     实测 375px 视口下顶栏内容 382px，已经溢出。与其为某一种语言的长度硬调
+     像素预算（下次改翻译又要重调一遍），不如让顶栏换行：机构名占一行，
+     语言切换器换到下一行占满宽度、靠右对齐，不管选中哪种语言都不会被挤。 */
+  .rz-topbar { flex-wrap: wrap; height: auto; min-height: 64px; padding: 10px 20px; row-gap: 8px; }
+  .rz-topbar-actions { width: 100%; justify-content: flex-end; margin-left: 0; }
+  .rz-login-alert { padding: 28px 22px 22px; }
+  .rz-login-alert-actions { align-items: stretch; flex-direction: column-reverse; }
+  .rz-login-alert-actions .rz-button { width: 100%; }
+  .rz-navigation-progress { top: auto; right: 14px; bottom: 18px; left: 14px; min-width: 0; padding: 13px 15px; }
+  .rz-page { padding: 32px 18px; }
+  .rz-admin-page { padding: 32px 18px; }
+  .rz-admin-heading { align-items: start; flex-direction: column; }
+  .rz-admin-heading .rz-button { width: 100%; }
+  .rz-admin-metrics { grid-template-columns: 1fr 1fr; }
+  .rz-admin-metrics article:nth-child(2) { border-right: 0; }
+  .rz-admin-metrics article:nth-child(-n+2) { border-bottom: 1px solid var(--rz-line); }
+  .rz-role-summary { grid-template-columns: 1fr; }
+  .rz-team-table-head { display: none; }
+  .rz-team-row { grid-template-columns: 1fr auto; padding: 14px 0; }
+  .rz-team-row > span:nth-child(2) { grid-column: 1; padding-left: 46px; color: var(--rz-text-muted); }
+  .rz-team-row > span:nth-child(3) { grid-column: 1; padding-left: 46px; }
+  .rz-team-actions { grid-column: 2; grid-row: 1 / span 3; max-width: 120px; }
+  .rz-team-invite { grid-template-columns: 1fr; }
+  .rz-mfa-card { grid-template-columns: 1fr; }.rz-mfa-icon, .rz-mfa-copy, .rz-mfa-state, .rz-mfa-enrollment, .rz-mfa-code, .rz-mfa-message, .rz-mfa-actions { grid-column: 1; }.rz-mfa-enrollment { grid-template-columns: 1fr; }.rz-mfa-qr { width: min(100%, 210px); }
+  .rz-error-banner { grid-template-columns: 1fr auto; }.rz-error-banner strong { grid-column: 1 / -1; }
+  .rz-dashboard { padding-top: 40px; }
+  .rz-dashboard-hero { grid-template-columns: 1fr; align-items: start; }
+  .rz-dashboard-hero .rz-button { width: 100%; }
+  .rz-hero-metrics { justify-content: space-between; gap: 16px; }
+  .rz-workflow-strip { display: flex; overflow-x: auto; min-height: 80px; }
+  .rz-workflow-step { min-width: 140px; }
+  .rz-consultation-row { grid-template-columns: 72px 1fr 18px; min-height: 100px; }
+  .rz-consultation-image { width: 72px; height: 64px; }
+  .rz-consultation-state, .rz-consultation-time { display: none; }
+  .rz-dashboard-aside { grid-template-columns: 1fr; }
+  .rz-page-heading { align-items: start; flex-direction: column; margin-bottom: 32px; }
+  .rz-page-heading .rz-button { width: 100%; }
+  .rz-stepper { overflow-x: auto; grid-template-columns: repeat(5, minmax(112px, 1fr)); }
+  .rz-stepper button { padding: 0 10px; }
+  .rz-flow-grid > .rz-flow-copy, .rz-analysis-step, .rz-preference-step, .rz-recommendation-step, .rz-preview-step { padding: 32px 20px; }
+  .rz-flow-header { align-items: start; flex-direction: column; }
+  .rz-flow-header h1 { font-size: 40px; }
+  .rz-flow-copy h2 { font-size: 30px; }
+  .rz-analysis-image, .rz-analysis-image img { min-height: 320px; }
+  /* 手机单列。图占满整宽、保持 4:3，窗帘才看得全 */
+  .rz-product-recommendations { grid-template-columns: 1fr; }
+  .rz-product-copy p { min-height: 0; }
+  .rz-quality-picker { flex-wrap: wrap; }
+  .rz-comparison { grid-template-columns: 1fr; }
+  .rz-preview-summary { align-items: start; flex-direction: column; }
+  .rz-flow-actions { grid-template-columns: auto 1fr; min-height: 88px; padding: 0 18px; }
+  .rz-flow-actions > span { display: none; }
+  .rz-flow-actions > .rz-button:last-child, .rz-final-actions { justify-self: end; }
+  .rz-final-actions .rz-button-secondary { display: none; }
+  .rz-catalog-toolbar { align-items: stretch; flex-direction: column; }
+  .rz-search { width: 100%; }
+  .rz-filter-row { overflow-x: auto; padding-bottom: 4px; }
+  .rz-filter-row button { flex: 0 0 auto; }
+  .rz-product-grid, .rz-fabric-grid { grid-template-columns: 1fr 1fr; gap: 24px 10px; }
+  .rz-catalog-copy h3 { font-size: 17px; }
+  .rz-material-intro { grid-template-columns: 1fr 1fr; gap: 8px; }.rz-material-intro p { grid-column: 1 / -1; }
+  .rz-material-grid { gap: 28px 10px; }
+  .rz-material-grid article > p { min-height: 0; }
+  .rz-article-list article { grid-template-columns: 56px 1fr 24px; gap: 10px; }
+  .rz-history-list > a, .rz-history-list > button { grid-template-columns: 88px 1fr 18px; gap: 12px; min-height: 96px; }.rz-history-image { width: 88px; height: 64px; }.rz-history-id { display: none; }.rz-history-list > * > span:nth-child(4) { display: none; }
+  .rz-detail-heading { align-items: start; flex-direction: column; }
+  .rz-detail-heading h1 { max-width: 100%; font-size: 34px; line-height: 1.08; overflow-wrap: anywhere; }
+  .rz-detail-heading > div { min-width: 0; width: 100%; }
+  .rz-detail-heading > div:last-child { width: 100%; }
+  .rz-detail-heading > div:last-child .rz-button { flex: 1; }
+  .rz-detail-image { min-height: 0; aspect-ratio: 16 / 9; }
+  .rz-settings-grid { grid-template-columns: 1fr; gap: 24px; }
+  /* 品牌区和四语言切换器挤在一条 80px 高、两端对齐的行里没有换行余地，
+     "中文" 那颗按钮会在自己内部被压成两行——不是溢出视口，肉眼看更糟。
+     跟顾问工作台顶栏同一个思路：换行成两行，切换器占满宽度、靠右。 */
+  .rz-share-nav { flex-wrap: wrap; row-gap: 10px; min-height: 0; padding: 14px 18px; }
+  .rz-share-nav > div:last-child { width: 100%; justify-content: flex-end; }
+  .rz-share-nav > div > span { display: none; }
+  .rz-share-hero > div:first-child { min-height: 480px; padding: 48px 24px; }.rz-share-hero h1 { font-size: 54px; }.rz-share-hero-image { min-height: 400px; }
+  .rz-share-product { grid-template-columns: 1fr; padding: 72px 24px; }.rz-share-index { display: none; }.rz-share-product-image { grid-column: 1; min-height: 420px; }.rz-share-note { padding: 88px 24px; }.rz-share-footer { align-items: start; flex-direction: column; gap: 28px; padding: 40px 24px; }
+  .rz-platform-page { padding: 0 18px 48px; }.rz-platform-hero { padding: 64px 0 48px; }.rz-platform-grid { grid-template-columns: 1fr; }.rz-platform-grid > a { min-height: 200px; border-right: 0; border-bottom: 1px solid var(--rz-line); }
+  /* 同一个问题：品牌区 + 四语言切换器 + "返回顾问工作台" 链接挤在一条定高、
+     两端对齐的行里，从没在窄屏测过。换行成两行，跟顶栏、分享页同一个做法。 */
+  .rz-platform-page > header { flex-wrap: wrap; height: auto; padding: 14px 0; row-gap: 10px; }
+  .rz-platform-actions { width: 100%; justify-content: flex-end; }
+  .rz-login-brand, .rz-login-quote { left: 24px; right: 24px; }.rz-login-brand { top: 24px; }.rz-login-quote { bottom: 32px; }.rz-login-quote h1 { font-size: 46px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rz-page, .rz-sidebar, .rz-catalog-image img, .rz-product-recommendations > button { animation: none !important; transition: none !important; transform: none !important; }
+}
+
+/* ---- 六题偏好漏斗 ----
+   字号整体比页面其它区块大一档：这一屏客户要逐条读、逐条选，
+   而不是扫一眼就过。原先选项正文只有 12px、格子里的数字 9.5px，
+   门店顾问站着用平板和海外客户用手机都吃力。 */
+.rz-survey { display: grid; }
+
+/* 一题一行：问题固定在左，选项横向铺满右侧。
+   竖着堆的话六道题要滚三屏，而右边一直空着。 */
+.rz-survey-q {
+  display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 28px;
+  align-items: start; padding: 20px 0; border-top: 1px solid var(--rz-line);
+}
+.rz-survey-q:first-child { border-top: 0; padding-top: 4px; }
+.rz-survey-ask { position: sticky; top: 16px; }
+.rz-survey-ask h3 { margin: 0 0 5px; font-size: 16px; font-weight: 650; line-height: 1.4; color: var(--rz-text); }
+.rz-survey-ask p { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--rz-muted); }
+.rz-survey-answer { display: grid; gap: 10px; min-width: 0; }
+.rz-survey-note { margin: 0; font-size: 13px; line-height: 1.6; color: var(--rz-muted); }
+
+.rz-survey-options { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 10px; }
+/* 没有示意图的题（例如遮光诉求）不需要那么宽的格子 */
+.rz-survey-options.is-plain { grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); }
+.rz-survey-options button {
+  display: grid; gap: 0; padding: 0; overflow: hidden; text-align: left; cursor: pointer;
+  border: 1px solid var(--rz-line); border-radius: 10px; background: var(--rz-surface); color: var(--rz-text);
+  transition: border-color .15s ease, background .15s ease;
+}
+.rz-survey-options button:hover:not(:disabled) { border-color: var(--rz-accent); }
+.rz-survey-options button.is-selected { border-color: var(--rz-accent); background: var(--rz-accent-soft, rgba(140,110,80,.08)); }
+/* 示意图一律正方形、一律等大。源图已经居中裁成 480×480，
+   这里再用 aspect-ratio 兜一道——十张里但凡有一张形状不同，
+   客户第一眼看的就是"为什么这张不一样"，而不是布本身。 */
+.rz-opt-thumb { display: block; background: #fff; border-bottom: 1px solid var(--rz-line); }
+.rz-opt-thumb img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.rz-opt-text { display: grid; gap: 2px; padding: 9px 12px 11px; align-content: start; }
+/* 「都可以」「帮我推荐」这类没有图的选项，文字贴顶会跟有图的卡片对不齐 */
+.rz-opt-text:only-child { align-content: center; }
+.rz-survey-options button strong { font-size: 14px; font-weight: 600; line-height: 1.35; }
+.rz-survey-options button small { font-size: 12px; line-height: 1.45; color: var(--rz-muted); }
+.rz-survey-options button i { font-style: normal; font-size: 11.5px; color: var(--rz-muted); }
+.rz-survey-options button:disabled, .rz-survey-options button.is-disabled { opacity: .45; cursor: not-allowed; }
+
+.rz-swatch-grid { display: grid; gap: 7px; }
+.rz-swatch-row { display: grid; grid-template-columns: 84px 1fr; align-items: center; gap: 10px; }
+.rz-swatch-label { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px; font-size: 13px; font-weight: 600; color: var(--rz-text); }
+.rz-swatch-label small { font-weight: 500; font-size: 11.5px; color: var(--rz-muted); }
+/* 四档明度固定四列，把整行铺满。
+   原先是 flex + 每格写死 84px：一行只占 354px，右边空掉一大半，各行的格子还错位——
+   既浪费地方，又不像一张色卡。定成四列后上下自然对齐，宽度也和下面那几道题的选项接近。 */
+.rz-swatch-cells { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.rz-swatch-cells button {
+  position: relative; padding: 0 0 5px; cursor: pointer; overflow: hidden;
+  border: 2px solid transparent; border-radius: 7px; background: var(--rz-surface);
+}
+/* 原先写的是 var(--rz-accent)——那个变量没定义，border-color 求值失败退化成 currentColor，
+   看着能用纯属巧合。选中态不能靠巧合，给明确的品牌色，并加一圈让它在浅色块上也跳得出来 */
+.rz-swatch-cells button.is-selected {
+  border-color: var(--rz-ink);
+  box-shadow: 0 0 0 1px var(--rz-ink);
+}
+/* 纯色卡。原先做成「上半截色块、下半截成品图」，两种东西并排让人不知道在比什么；
+   而且各占一半后谁都太小看不清。合成一整块，尺寸也给够。 */
+.rz-swatch-chip { display: block; height: 66px; }
+/* 明度档与款数并排，别各占一行——六行色板每行多 16px，一屏就没了 */
+.rz-swatch-cells span {
+  display: flex; align-items: baseline; justify-content: center; gap: 4px;
+  padding-top: 3px; font-size: 11.5px; line-height: 1.3; color: var(--rz-text);
+}
+.rz-swatch-cells small { font-size: 10.5px; color: var(--rz-muted); }
+
+/* 色族按款数排序，前几族已覆盖九成以上。其余折起来，
+   否则十行色板一题就要吃掉一屏半。 */
+.rz-swatch-more {
+  justify-self: start; margin-top: 2px; padding: 5px 12px; cursor: pointer; font-size: 12.5px;
+  border: 1px dashed var(--rz-line); border-radius: 999px; background: transparent; color: var(--rz-muted);
+}
+.rz-swatch-more:hover { border-color: var(--rz-accent); color: var(--rz-text); }
+
+.rz-survey-any {
+  justify-self: start; padding: 9px 16px; cursor: pointer; font-size: 14px;
+  border: 1px dashed var(--rz-line); border-radius: 999px; background: transparent; color: var(--rz-text);
+}
+.rz-survey-any.is-selected { border-style: solid; border-color: var(--rz-accent); }
+
+.rz-survey-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.rz-survey-tags button {
+  padding: 7px 14px; cursor: pointer; font-size: 14px;
+  border: 1px solid var(--rz-line); border-radius: 999px; background: var(--rz-surface); color: var(--rz-text);
+}
+.rz-survey-tags button.is-selected { border-color: var(--rz-accent); background: var(--rz-accent-soft, rgba(140,110,80,.08)); }
+
+/* 剩余数量常驻条：客户最怕认真填完却一款没有，提示必须在她还能改的时候出现 */
+.rz-survey-bar {
+  position: sticky; bottom: 0; display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 12px 16px; border: 1px solid var(--rz-line); border-radius: 10px;
+  background: var(--rz-surface); font-size: 14px;
+}
+/* 商品目录分批加载：一次铺开两百张会同时发起几百个图片请求 */
+.rz-catalog-more {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  margin-top: 18px; font-size: 13.5px; color: var(--rz-muted);
+}
+.rz-catalog-more button {
+  padding: 8px 18px; cursor: pointer; font-size: 13.5px; color: var(--rz-text);
+  border: 1px solid var(--rz-line); border-radius: 999px; background: var(--rz-surface);
+}
+.rz-catalog-more button:hover { border-color: var(--rz-accent); }
+
+.rz-survey-bar.is-few { border-color: #c9a227; }
+.rz-survey-bar.is-blocked { border-color: #c0392b; background: rgba(192,57,43,.06); }
+.rz-survey-progress { display: inline-flex; align-items: center; gap: 5px; color: var(--rz-muted); white-space: nowrap; }
+
+/* 这一节整体写在文件上方那两个断点之后，同名声明后来者居上——
+   所以窄屏调整必须留在这里，挪回上面就会被基础规则原样盖掉。 */
+@media (max-width: 900px) {
+  /* 左问右答的两栏在窄屏放不下，回落成上下 */
+  .rz-survey-q { grid-template-columns: 1fr; gap: 12px; padding: 16px 0; }
+  .rz-survey-ask { position: static; }
+  .rz-survey-options { grid-template-columns: repeat(auto-fill, minmax(136px, 1fr)); }
+  .rz-survey-options.is-plain { grid-template-columns: repeat(auto-fill, minmax(152px, 1fr)); }
+}
+
+@media (max-width: 700px) {
+  /* 手机上标签与色块并排只给色块留 207px，四档的色族会被挤到第二行去，
+     一族色板看着像两族。标签抬到上面一行，五档就能横铺在一行里。 */
+  .rz-swatch-row { grid-template-columns: 1fr; gap: 4px; }
+  /* 明度只有四档，写 5 列会永远空出一格 */
+  .rz-swatch-cells { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+}
+
+/* ---- 场景确认与结果页 ---- */
+.rz-window-fix { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.rz-window-fix button {
+  padding: 7px 13px; cursor: pointer; font-size: 12.5px;
+  border: 1px solid var(--rz-line); border-radius: 999px; background: transparent; color: var(--rz-text-muted);
+}
+/* 选中态原先写的是 var(--rz-accent)，而这个变量没定义——边框颜色于是和未选中态一模一样，
+   点完看不出选了哪个窗型。改成和问卷选项一致的实心样式。 */
+.rz-window-fix button.is-selected { border-color: var(--rz-ink); background: var(--rz-ink); color: #fffaf4; }
+.rz-analysis-warn { color: #c0392b; }
+
+/* 推荐理由是这张卡片上客户真正要读的东西，字号仅次于商品名。
+   `--rz-muted` 和 `--rz-accent` 这两个变量 :root 里从来没定义过，var() 求值失败会退化成
+   继承，于是三段渲染成同一个颜色、没有层级。
+   但也不该靠上色去分——绿配红跟这套墨色/陶土的底子完全不搭。改成单色分两档：
+   理由用正文色，两条附注降一档灰、各自用一条细竖线起头，靠结构区分而不是靠颜色。 */
+.rz-product-reason { display: grid; gap: 6px; margin-top: 8px; font-size: 15px; line-height: 1.6; color: var(--rz-text); }
+.rz-product-reason em {
+  display: block; font-style: normal; font-weight: 400; font-size: 13px; line-height: 1.55;
+  color: var(--rz-text-muted); padding-left: 10px; border-left: 1px solid var(--rz-line);
+}
+/* 提醒那条边线重一点，扫一眼就能和"符合"分开。
+   右下角的选择钮是绝对定位浮在卡片上，这是最后一段，不留出钮宽就会钻到它底下。 */
+.rz-product-reason em.rz-product-caveat { border-left-color: var(--rz-line-strong); padding-right: 44px; }
+
+/* 实测行：排成一行小字数据，不要竖线——它不是附注，是上面那句话的依据。
+   等宽数字让三组数对齐，扫一眼像检测结果而不像句子。 */
+.rz-product-reason em.rz-product-evidence {
+  padding: 0; border-left: 0; margin-top: -1px;
+  color: var(--rz-text-faint); font-size: 11.5px; letter-spacing: .01em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 术语说明整屏只出现一次，贴在卡片上方 */
+.rz-metric-note {
+  margin: 18px 0 0; padding: 10px 14px;
+  border-left: 2px solid var(--rz-line-strong); background: rgba(232, 226, 214, .5);
+  color: var(--rz-text-muted); font-size: 12px; line-height: 1.7;
+}
+.rz-metric-note b { color: var(--rz-text); font-weight: 600; }
+.rz-product-image i.is-note {
+  left: 8px; right: auto; padding: 3px 7px; font-size: 9.5px;
+  background: rgba(0,0,0,.62); color: #fff; border-radius: 4px;
+}
+
+/* 这一节必须留在上面那组 `.rz-product-reason` 之后：媒体查询不增加特异性，
+   挪进文件上方那几个断点里，会被后面的普通规则原样盖掉。 */
+@media (max-width: 700px) {
+  /* 卡片改成单列通栏后文字区有 300px 出头，字号不用再降 */
+  /* 空间分析的两列在手机上每列不足 160px，长句会碎成一行三四个字 */
+  .rz-analysis-results dl { grid-template-columns: 1fr; }
+  .rz-analysis-results dl div:nth-child(odd) { padding-right: 0; border-right: 0; }
+  .rz-analysis-results dl div:nth-child(even) { padding-left: 0; }
+
+  /* 底部操作条是 fixed 的，页面得给它让出位置。
+     `.rz-flow-page` 本来留了 140px，但 `.rz-page { padding: 32px 18px }` 同特异性、
+     写在它后面，把整条 padding 连底部一起盖成了 32px——比操作条还矮 56px，
+     最后一屏的按钮就压在条底下，怎么点都点不着。这是从第一版就带着的。 */
+  .rz-page.rz-flow-page { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+  /* iPhone 底部那道 home 横条会盖住按钮，安全区要单独让 */
+  .rz-flow-actions { min-height: 72px; padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+  /* 顶部这一组在手机上吃掉近三分之一屏。留下能定位的（标题、走到第几步），
+     其余（栏目名、副标题、草稿编号）是桌面上的排版装饰，这里收掉。 */
+  .rz-flow-header { gap: 6px; }
+  .rz-flow-header .rz-eyebrow, .rz-flow-header p { display: none; }
+  .rz-flow-header h1 { margin: 0; font-size: 26px; }
+  .rz-back-link { margin-bottom: 14px; }
+  .rz-draft-state { padding: 4px 8px; font-size: 9px; }
+  .rz-stepper { margin: 14px 0 12px; }
+  .rz-stepper button { min-height: 46px; }
+}
+
+/* ---- 商品数据（管理后台）---- */
+.rz-admin-sku-list { display: grid; gap: 8px; margin-top: 16px; }
+.rz-admin-sku {
+  display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; align-items: center; gap: 14px;
+  padding: 10px 14px; border: 1px solid var(--rz-line); border-radius: 10px; background: var(--rz-surface);
+}
+.rz-admin-sku.is-offline { opacity: .55; }
+.rz-admin-sku-thumb { display: block; width: 56px; height: 42px; overflow: hidden; border-radius: 6px; background: #fff; }
+.rz-admin-sku-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.rz-admin-sku-thumb i {
+  display: grid; place-items: center; width: 100%; height: 100%;
+  font-style: normal; font-size: 11px; color: var(--rz-muted); background: var(--rz-line-soft, #f0ede8);
+}
+.rz-admin-sku-copy { display: grid; gap: 1px; min-width: 0; }
+.rz-admin-sku-copy code { font-size: 11.5px; color: var(--rz-muted); background: none; padding: 0; }
+.rz-admin-sku-copy strong { font-size: 14.5px; font-weight: 600; }
+.rz-admin-sku-copy small { font-size: 12.5px; color: var(--rz-muted); }
+.rz-admin-sku-state { display: inline-flex; align-items: center; gap: 10px; }
+.rz-admin-sku-state em {
+  font-style: normal; font-size: 11.5px; color: #a4432f;
+  padding: 2px 8px; border-radius: 999px; background: rgba(164,67,47,.1);
+}
+.rz-admin-sku-state button {
+  padding: 6px 14px; cursor: pointer; font-size: 13px; white-space: nowrap;
+  border: 1px solid var(--rz-line); border-radius: 999px; background: var(--rz-surface); color: var(--rz-text);
+}
+.rz-admin-sku-state button:hover:not(:disabled) { border-color: var(--rz-accent); }
+.rz-admin-sku-state button.is-offline { border-color: var(--rz-accent); color: var(--rz-accent); }
+.rz-admin-sku-state button:disabled { opacity: .5; cursor: progress; }
+
+/* ── 语音顾问 ──────────────────────────────────────────────────────────
+   **底色并入本产品的米色系，球本身一个参数没动。**
+   原来整块近黑贴在米白外壳里，中间没有任何过渡，像贴了一张膏药。
+   球之所以能照搬：它的光是自己发的——sphere 是近黑渐变，两层琥珀/冷蓝
+   veil 与 rim 用 screen 混合叠在 sphere 上，混合对象是球自己而不是页面。
+   前提是把混合关在球内（见 .rz-voice-orb 的 isolation），否则一换浅底，
+   screen 会跟米白背景混出一片白，球当场散掉。 */
+.rz-voice {
+  --orb-size: min(38vw, 24vh);
+  --voice-bg: var(--rz-surface);
+  --voice-line: var(--rz-line);
+  --voice-text: var(--rz-text);
+  --voice-faint: var(--rz-text-faint);
+  /* 琥珀在米白上要压深一档才读得出是「亮起来了」，原值 #e2a860 在浅底上发灰 */
+  --voice-amber: #b8752e;
+  display: flex; flex-direction: column;
+  /* dvh 而不是 vh：手机与平板的地址栏会吃掉 vh，球和拍照键因此落到屏幕外，
+     而这个页面唯一的操作就是那颗球。
+     76px = 外壳顶栏 64（实测，窄屏与桌面同高）+ 12 底部余量。
+     原来写 128 是拍脑袋，量过才发现整整多减了一屏的十六分之一。 */
+  height: calc(100dvh - 76px); min-height: 520px;
+  border: 1px solid var(--voice-line); border-radius: 4px;
+  background: var(--voice-bg); color: var(--voice-text); overflow: hidden;
+}
+
+/* 球随状态换位：待机时居中放大，是屏幕上唯一的主角；接通后缩小落到底部，
+   把主屏让给推荐结果。那个位移本身就是反馈——不读状态文字也知道它接上了。 */
+.rz-voice.is-idle { --orb-size: min(31vw, 18vh); }
+.rz-voice.is-live { --orb-size: min(17vw, 10vh); }
+
+.rz-voice-head { display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 14px 18px; border-bottom: 1px solid var(--voice-line); }
+.rz-voice-head h1 { font-size: 17px; font-weight: 600; letter-spacing: .06em; }
+.rz-voice-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--rz-line-strong); transition: background-color 200ms; }
+.rz-voice-dot.live { background: var(--rz-success); box-shadow: 0 0 8px rgba(64, 99, 77, .5); }
+.rz-voice-dot.err { background: var(--rz-error); }
+/* 现在回答的是哪个模型。铸凭证返回之前是灰的（我们的意图），之后变绿（服务端确认）——
+   门店账号请求正式版会被回落成 mini，只有真正铸出来的那个才算数。 */
+.rz-voice-engine { margin-left: auto; padding: 3px 10px; border: 1px solid var(--voice-line); border-radius: 999px;
+  color: var(--voice-faint); font-size: 11px; letter-spacing: .04em; white-space: nowrap; }
+.rz-voice-engine.is-confirmed { color: var(--rz-success); border-color: var(--rz-success); }
+/* 平台管理员才拿得到的入口：点一下换模型。门店看到的还是个只读徽章 */
+button.rz-voice-engine { font: inherit; font-size: 11px; cursor: pointer; background: none; }
+button.rz-voice-engine.is-switch { border-style: dashed; }
+button.rz-voice-engine:active { transform: scale(.96); }
+button.rz-voice-engine:focus-visible { outline: 2px solid var(--voice-amber); outline-offset: 2px; }
+.rz-voice-status { margin-left: auto; color: var(--voice-faint); font-size: 12px; }
+
+/* 一条会话流：顾客说的、助手说的、传的照片、推的款，按发生顺序摆。
+   曾经改成「主屏只留最后一组推荐」，老板试完要回会话形式，
+   而且**所有字不用滚动就能看到**——所以约束是紧凑 + 新内容自动贴底。 */
+.rz-voice-body { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 8px;
+  overflow-y: auto; padding: 14px 16px 4px; }
+.rz-voice.is-idle .rz-voice-body { flex: 0 1 auto; padding-bottom: 0; }
+
+/* 接通前报走到哪一步了。孤零零一行，居中，不占气泡的样式 */
+.rz-voice-stage { flex: 0 0 auto; align-self: center; padding: 4px 0;
+  color: var(--voice-faint); font-size: 12px; letter-spacing: .06em; }
+
+/* 比原来紧一档：字号 15→14、padding 10/14→8/12。
+   一屏能多放两句，就少一次滚动 */
+.rz-voice-cap { flex: 0 0 auto; max-width: 84%; padding: 8px 12px; border-radius: 13px;
+  font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+.rz-voice-cap.is-user { align-self: flex-end; border-bottom-right-radius: 4px;
+  background: var(--rz-ink); color: #fdf8f2; }
+.rz-voice-cap.is-assistant { align-self: flex-start; border-bottom-left-radius: 4px;
+  background: var(--rz-canvas); border: 1px solid var(--voice-line); }
+.rz-voice-cap.is-tool { align-self: center; padding: 1px; background: none;
+  color: var(--voice-faint); font-size: 11px; }
+/* 顾客那边发出来的东西，跟顾客的话一样靠右 */
+.rz-voice-photo { flex: 0 0 auto; align-self: flex-end; max-width: 54%; border-radius: 13px;
+  border-bottom-right-radius: 4px; border: 1px solid var(--voice-line); }
+
+/* 装上去之后的样子。这是顾客真正想看的东西，所以它比流里别的都大——
+   顾问会把手机转过去，这一张要能让人一眼看懂 */
+.rz-voice-render { flex: 0 0 auto; align-self: stretch; margin: 2px 0; display: grid; gap: 5px; }
+.rz-voice-render img { display: block; width: 100%; height: auto;
+  border: 1px solid var(--voice-line); background: #fff; }
+.rz-voice-render figcaption { color: var(--voice-faint); font-size: 11px; }
+
+/* 布样横着排。**它不吃纵向空间**——这正是「所有字不用滚动就能看到」的前提：
+   五款竖着摆要三行，横着摆只占一行，省下来的高度全给了句子。
+   flex: 0 0 auto 不能省：外层是纵向 flex，默认 shrink 会把这一条压扁，
+   卡片文字被挤出盒子再被 overflow-x 裁掉，屏幕上只剩图，看不出是哪一款。
+   这种问题接口返回完全正常，只有截图能发现。 */
+.rz-voice-cards { flex: 0 0 auto; align-self: stretch; display: flex; gap: 8px; overflow-x: auto;
+  padding: 2px 0 4px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.rz-voice-cards::-webkit-scrollbar { height: 0; }
+/* 卡片是可点的：顾客指着屏幕说「就这个」，点中了才谈得上看装在他家什么样 */
+.rz-voice-card { flex: 0 0 138px; scroll-snap-align: start; padding: 0; text-align: left;
+  font: inherit; color: inherit; cursor: pointer;
+  border: 1px solid var(--voice-line); background: var(--rz-canvas);
+  transition: border-color 160ms ease, box-shadow 160ms ease; }
+.rz-voice-card.is-picked { border-color: var(--voice-amber);
+  box-shadow: inset 0 0 0 1px var(--voice-amber); }
+.rz-voice-card:focus-visible { outline: 2px solid var(--voice-amber); outline-offset: 2px; }
+/* 4:3 而不是正方形：布料看的是颜色和肌理，横向裁一刀不损失信息，省下四分之一高度 */
+.rz-voice-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3;
+  object-fit: cover; background: #fff; }
+.rz-voice-card-meta { display: grid; gap: 2px; padding: 6px 8px 8px; }
+.rz-voice-card-meta strong { font-size: 12.5px; font-weight: 600; }
+.rz-voice-card-meta small { color: var(--voice-faint); font-size: 10.5px; line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* 房间照片本身就是入口：顾客递过手机想说的多半是「你看我这儿怎么样」 */
+.rz-voice-photo-tap { position: relative; display: block; padding: 0; border: 0;
+  background: none; cursor: pointer; align-self: stretch; font: inherit; }
+.rz-voice-photo-tap span { position: absolute; right: 8px; bottom: 8px;
+  font-size: 11px; color: #fff; background: rgba(0, 0, 0, 0.45);
+  padding: 3px 8px; border-radius: 999px; backdrop-filter: blur(2px); }
+.rz-voice-photo-tap:focus-visible { outline: 2px solid var(--voice-amber); outline-offset: 2px; }
+
+/* 后台的门店语音记录。跟线索的人最需要的是顾客自己那句话，
+   而它以前只活在店员手机的内存里，关掉页面就没了 */
+.rz-voice-log { margin-top: 28px; display: grid; gap: 12px; }
+.rz-voice-log h2 { font-size: 17px; }
+.rz-voice-log-lead { color: var(--rz-muted); font-size: 13px; line-height: 1.7; }
+.rz-voice-log-session { border: 1px solid var(--rz-line); padding: 14px 16px; display: grid; gap: 8px; }
+.rz-voice-log-session header { display: flex; justify-content: space-between; align-items: baseline;
+  gap: 12px; font-size: 12.5px; }
+.rz-voice-log-session header span { color: var(--rz-muted); font-size: 11.5px; }
+.rz-voice-log-taps { font-size: 12.5px; color: var(--rz-muted); }
+.rz-voice-log-turns { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.rz-voice-log-turns li { display: grid; grid-template-columns: 54px 1fr; gap: 10px;
+  font-size: 13px; line-height: 1.65; }
+.rz-voice-log-turns b { font-weight: 600; font-size: 11.5px; color: var(--rz-muted); padding-top: 2px; }
+/* 顾客那一侧要更显眼：读这一页的人是来找顾客说了什么的 */
+.rz-voice-log-turns li.is-user span { font-weight: 500; }
+.rz-voice-log-turns li.is-assistant span { color: var(--rz-muted); }
+.rz-voice-log-empty { font-size: 12.5px; color: var(--rz-muted); }
+
+/* 换人与翻旧账。两位客人之间只隔五分钟，而手机上还留着上一位的照片和偏好 */
+.rz-voice-sessionbar { display: flex; gap: 8px; justify-content: center; }
+.rz-voice-sessionbar button { font: inherit; font-size: 12px; color: var(--voice-faint);
+  padding: 5px 12px; cursor: pointer;
+  border: 1px solid var(--voice-line); background: transparent; border-radius: 999px; }
+.rz-voice-sessionbar button:focus-visible { outline: 2px solid var(--voice-amber); outline-offset: 2px; }
+
+/* 近期接待。薄抽屉不是一个页面：顾问单手拿着手机，顾客站在旁边 */
+.rz-voice-sheet { position: fixed; inset: 0; z-index: 40; display: flex; flex-direction: column;
+  justify-content: flex-end; background: rgba(0, 0, 0, 0.28); }
+.rz-voice-sheet-head { display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; background: var(--rz-canvas); border-bottom: 1px solid var(--voice-line); }
+.rz-voice-sheet-head button { font: inherit; font-size: 13px; color: var(--voice-faint);
+  background: none; border: 0; cursor: pointer; padding: 4px 8px; }
+.rz-voice-sheet-list { background: var(--rz-canvas); max-height: 62vh; overflow-y: auto;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+.rz-voice-sheet-empty { padding: 20px 16px; color: var(--voice-faint); font-size: 12px; line-height: 1.7; }
+.rz-voice-sheet-row { display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 10px 16px; text-align: left; font: inherit; color: inherit; cursor: pointer;
+  background: none; border: 0; border-bottom: 1px solid var(--voice-line); }
+.rz-voice-sheet-row img, .rz-voice-sheet-blank { flex: 0 0 48px; width: 48px; height: 48px;
+  object-fit: cover; display: block; background: var(--voice-line); }
+.rz-voice-sheet-meta { display: grid; gap: 2px; min-width: 0; }
+.rz-voice-sheet-meta strong { font-size: 13px; font-weight: 600; }
+/* 顾客自己的第一句话是最好的辨认凭据，比任何生成的摘要都准 */
+.rz-voice-sheet-meta small { font-size: 11px; color: var(--voice-ink); white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; }
+.rz-voice-sheet-meta i { font-style: normal; font-size: 10px; color: var(--voice-faint); }
+
+/* 面料册：顾客说不出「提花」，但他会指。图是网页问卷那批人工挑的面料细节图，
+   两边共用同一批——那批图看得见经纬织纹，成品缩略图在这个尺寸上根本分不出质感。 */
+.rz-voice-choices { flex: 0 0 auto; align-self: stretch; display: grid; gap: 6px; }
+.rz-voice-choice-ask { font-size: 13px; line-height: 1.5; color: var(--voice-ink); }
+/* 两列：手机上一屏放得下五个选项而不必滚动，滚动就等于看不见 */
+.rz-voice-choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+/* 颜色是纯色块，不需要那么大的格子，三列刚好一行放下六族 */
+.rz-voice-choice-grid.is-colour { grid-template-columns: repeat(3, 1fr); }
+.rz-voice-choice { display: flex; align-items: center; gap: 8px; padding: 6px;
+  text-align: left; font: inherit; color: inherit; cursor: pointer;
+  border: 1px solid var(--voice-line); background: var(--rz-canvas);
+  transition: border-color 160ms ease, box-shadow 160ms ease; }
+.rz-voice-choice.is-picked { border-color: var(--voice-amber);
+  box-shadow: inset 0 0 0 1px var(--voice-amber); }
+.rz-voice-choice:focus-visible { outline: 2px solid var(--voice-amber); outline-offset: 2px; }
+.rz-voice-choice img { flex: 0 0 44px; width: 44px; height: 44px; object-fit: cover;
+  display: block; background: #fff; }
+.rz-voice-choice-chip { flex: 0 0 28px; width: 28px; height: 28px; border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.08); }
+.rz-voice-choice-text { display: grid; gap: 1px; min-width: 0; }
+.rz-voice-choice-text strong { font-size: 12px; font-weight: 600; line-height: 1.3; }
+/* 说明必须在，图旁边没有话，顾客只是在看好看的图 */
+.rz-voice-choice-text small { color: var(--voice-faint); font-size: 10px; line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.rz-voice-choice-grid.is-colour .rz-voice-choice { flex-direction: column; gap: 4px; text-align: center; }
+.rz-voice-choice-grid.is-colour .rz-voice-choice-text small { -webkit-line-clamp: 1; }
+
+/* 不设 align-items：现场传译共用这个外壳，它底下那颗麦克风键是靠默认拉伸定宽的 */
+/* 底部留够:球的光晕是本体的 130% 还带 30px 模糊,padding 小了会被外壳的
+   overflow: hidden 削掉一条边,球看起来像贴在屏幕边缘 */
+.rz-voice-foot { flex: 0 0 auto; display: flex; flex-direction: column; gap: 12px;
+  padding: 10px 16px calc(26px + env(safe-area-inset-bottom));
+  background: linear-gradient(transparent, var(--voice-bg) 40%); }
+/* 待机时这一叠撑满剩下的高度，球因此落在屏幕正中——那是它唯一该在的位置 */
+.rz-voice.is-idle .rz-voice-foot { flex: 1 1 auto; justify-content: center; }
+.rz-voice-controls { display: flex; align-items: center; justify-content: center; gap: 24px; }
+/* 球两侧必须等宽，少一边球就偏了 */
+.rz-voice-spacer { width: 46px; flex: 0 0 auto; }
+
+/* 待机屏的引导。顾问第一次拿到这页，不知道该让顾客说什么、能说多细 */
+.rz-voice-invite { display: grid; gap: 10px; justify-items: center; width: 100%; max-width: 320px;
+  margin: 0 auto; text-align: center; }
+.rz-voice-invite-line { font-size: 15px; }
+.rz-voice-invite-eg { color: var(--voice-faint); font-size: 11.5px; line-height: 1.75; }
+.rz-voice-invite-eg.is-warn { color: var(--rz-error); }
+
+/* 「继续刚才那场」。没有会话列表——顾问单手拿着手机、顾客站在旁边，
+   他要的不是浏览历史，是刚才那场别丢了 */
+.rz-voice-resume { display: grid; gap: 2px; width: 100%; padding: 10px 16px;
+  font: inherit; text-align: left; cursor: pointer;
+  border: 1px solid var(--voice-amber); border-radius: 12px;
+  background: var(--rz-canvas); color: var(--voice-text); }
+.rz-voice-resume-lead { font-size: 13px; font-weight: 600; color: var(--voice-amber); }
+.rz-voice-resume-meta { color: var(--voice-faint); font-size: 11px; }
+.rz-voice-resume:active { transform: scale(.985); }
+.rz-voice-resume:focus-visible { outline: 2px solid var(--voice-amber); outline-offset: 2px; }
+
+/* 原来是一个 ▣ 字符扣在 46 像素的空圆圈里，没人认得出那是拍照。
+   待机时给它字、给它相机图标、给它整条宽度；接通之后才收回成球边上的图标。 */
+.rz-voice-shot-cta { display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 11px 18px; font: inherit; font-size: 13px; cursor: pointer;
+  border: 1px solid var(--voice-line); border-radius: 999px;
+  background: var(--rz-canvas); color: var(--rz-text-muted); }
+.rz-voice-shot-cta svg { width: 17px; height: 17px; flex: 0 0 auto; }
+.rz-voice-shot-cta small { color: var(--voice-faint); font-size: 11px; }
+.rz-voice-shot-cta.is-done { border-color: var(--voice-amber); color: var(--voice-amber); }
+.rz-voice-shot-cta:disabled { opacity: .5; cursor: default; }
+
+/* 麦克风被挡住时的第一手。翻设置是最后一招，先让浏览器有机会自己问一次 */
+.rz-voice-usermedia { display: block; width: 100%; }
+.rz-voice-mic-cta { width: 100%; padding: 11px 18px; font: inherit; font-size: 13.5px; font-weight: 600;
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  border: 1px solid var(--voice-amber); border-radius: 999px; text-decoration: none;
+  background: var(--voice-amber); color: #fdf8f2; }
+.rz-voice-mic-cta:active { transform: scale(.985); }
+.rz-voice-mic-cta:focus-visible { outline: 2px solid var(--rz-ink); outline-offset: 2px; }
+
+/* 选中一款之后才出现。它是这条链路的临门一脚，所以给足存在感 */
+.rz-voice-render-cta { width: 100%; max-width: 520px; margin: 0 auto; padding: 11px 18px;
+  font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;
+  border: 1px solid var(--rz-ink); border-radius: 999px;
+  background: var(--rz-ink); color: #fdf8f2; }
+.rz-voice-render-cta:disabled { opacity: .55; cursor: default; }
+.rz-voice-render-cta:active:not(:disabled) { transform: scale(.985); }
+.rz-voice-render-cta:focus-visible { outline: 2px solid var(--voice-amber); outline-offset: 2px; }
+
+/* 打字是旁路，所以它安静地贴在球上面而不是取代球 */
+.rz-voice-compose { display: flex; gap: 8px; width: 100%; max-width: 520px; margin: 0 auto; }
+.rz-voice-compose input { flex: 1; min-width: 0; height: 40px; padding: 0 16px; font: inherit; font-size: 14px;
+  border: 1px solid var(--voice-line); border-radius: 999px; background: var(--rz-canvas); color: var(--voice-text); }
+.rz-voice-compose input::placeholder { color: var(--voice-faint); }
+.rz-voice-compose input:focus { outline: none; border-color: var(--voice-amber); }
+.rz-voice-compose button { flex: 0 0 auto; height: 40px; padding: 0 18px; font: inherit; font-size: 13px; cursor: pointer;
+  border: 1px solid var(--rz-ink); border-radius: 999px; background: var(--rz-ink); color: #fdf8f2; }
+.rz-voice-compose input:disabled, .rz-voice-compose button:disabled { opacity: .45; cursor: default; }
+/* 刻意安静、刻意偏一边：球是产品，相机和键盘只是偶尔的差事 */
+.rz-voice-shot, .rz-voice-key { width: 46px; height: 46px; flex: 0 0 auto; display: grid; place-items: center;
+  border: 1px solid var(--voice-line); border-radius: 50%; background: var(--rz-canvas);
+  color: var(--rz-text-muted); line-height: 1; cursor: pointer;
+  transition: transform 160ms ease, opacity 160ms ease; }
+.rz-voice-shot svg, .rz-voice-key svg { width: 20px; height: 20px; }
+.rz-voice-shot:active, .rz-voice-key:active { transform: scale(.9); }
+.rz-voice-shot:disabled { opacity: .45; cursor: default; }
+.rz-voice-shot.is-done { border-color: var(--voice-amber); color: var(--voice-amber); }
+.rz-voice-key.is-on { border-color: var(--voice-amber); color: var(--voice-amber); }
+
+/* 球就是麦克风：一个目标同时承载状态，屏幕上永远不会出现按钮和指示灯互相矛盾 */
+.rz-voice-orb { --orb: var(--orb-size); --level: 0;
+  position: relative; width: var(--orb); height: var(--orb);
+  display: grid; place-items: center; padding: 0; border: 0; background: none; cursor: pointer;
+  /* 把 veil 与 rim 的 screen 混合关在球里。少了这一行，米白底会被一起混进来，
+     两层光直接漂白，球剩一个灰圈——换底色时唯一会真正弄坏球的地方 */
+  isolation: isolate;
+  transition: transform 260ms cubic-bezier(.34, 1.56, .64, 1),
+    width 380ms cubic-bezier(.4, 0, .2, 1), height 380ms cubic-bezier(.4, 0, .2, 1); }
+/* 按下去要快要线性，手指才觉得被接住；回弹稍微过冲一点，那才读作一个实物 */
+.rz-voice-orb:active { transform: scale(.93); transition-duration: 90ms; transition-timing-function: cubic-bezier(.2, 0, 0, 1); }
+.rz-voice-orb:focus-visible { outline: 2px solid var(--voice-amber); outline-offset: 8px; border-radius: 50%; }
+.rz-voice-orb > span { grid-area: 1 / 1; border-radius: 50%; pointer-events: none; }
+
+/* 一圈涟漪，从手指落下的地方走。每次点都放，所以连接还没决定任何事之前，点击就已经被应答了 */
+.rz-voice-orb .ping { width: 86%; height: 86%; border: 1px solid rgba(226, 168, 96, .85); opacity: 0; transform: scale(.82); }
+.rz-voice-orb.is-tapped .ping { animation: rz-orb-ping 620ms cubic-bezier(.2, 0, 0, 1); }
+@keyframes rz-orb-ping { 0% { opacity: .9; transform: scale(.82); } 100% { opacity: 0; transform: scale(1.35); } }
+
+.rz-voice-orb .halo { width: 130%; height: 130%; filter: blur(30px);
+  background: radial-gradient(circle at 50% 52%, rgba(226, 168, 96, .55) 0%,
+    rgba(154, 104, 44, .34) 26%, rgba(96, 140, 166, .20) 48%, transparent 68%);
+  transform: scale(calc(1 + var(--level) * .3));
+  /* 光晕是「它醒了」的读法。从 .18 直接跳到 1 是旧版本显得草率的最大原因 */
+  transition: transform .12s ease-out, opacity 320ms cubic-bezier(.2, 0, 0, 1); }
+/* 深底上球靠光晕浮起来，浅底上光晕不够，得给它一道落影才不像贴纸 */
+.rz-voice-orb .sphere { width: 86%; height: 86%;
+  background: radial-gradient(circle at 44% 42%, #14171a 0%, #0c0e10 64%, #08090b 100%);
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, .95), inset -20px -24px 66px rgba(0, 0, 0, .85),
+    0 16px 34px rgba(74, 23, 18, .22);
+  transform: scale(calc(1 + var(--level) * .09));
+  transition: transform .1s ease-out, filter 280ms cubic-bezier(.2, 0, 0, 1); }
+.rz-voice-orb .veil { width: 86%; height: 86%; mix-blend-mode: screen; filter: blur(9px);
+  background: radial-gradient(circle at 32% 30%, #f0b269, rgba(200, 132, 58, .55) 30%, transparent 56%);
+  animation: rz-orb-drift 13s linear infinite; }
+.rz-voice-orb .veil.b { animation-duration: 19s; animation-direction: reverse; opacity: .95;
+  background: radial-gradient(circle at 68% 64%, #6fb2d8, rgba(74, 120, 150, .5) 32%, transparent 58%); }
+.rz-voice-orb .rim { width: 86%; height: 86%; mix-blend-mode: screen;
+  background: conic-gradient(from 196deg, transparent 0deg, rgba(226, 168, 96, .85) 34deg,
+    #fff2e0 60deg, rgba(140, 196, 226, .8) 86deg, transparent 128deg);
+  -webkit-mask: radial-gradient(circle, transparent 71%, #000 80%, #000 100%);
+          mask: radial-gradient(circle, transparent 71%, #000 80%, #000 100%); }
+.rz-voice-orb .gloss { width: 86%; height: 86%;
+  background: radial-gradient(ellipse 26% 18% at 36% 25%, rgba(255, 245, 232, .55), transparent 70%); }
+
+.rz-voice-orb.is-off .veil { animation-play-state: paused; }
+.rz-voice-orb.is-off .sphere { filter: saturate(.3) brightness(.6); }
+.rz-voice-orb.is-off .halo { opacity: .18; }
+.rz-voice-orb.is-thinking .veil { animation-duration: 5s; }
+.rz-voice-orb.is-thinking .sphere { animation: rz-orb-breathe 1.8s ease-in-out infinite; }
+.rz-voice-orb.is-listening .sphere { animation: rz-orb-breathe 4s ease-in-out infinite; }
+.rz-voice-orb.is-listening .halo { opacity: .5; }
+.rz-voice-orb.is-speaking .halo { opacity: 1; }
+
+/* 渐变的中心不在轴上，所以旋转这一层等于让光在表面下走一圈——一个 transform，从不重绘 */
+@keyframes rz-orb-drift { to { transform: rotate(360deg); } }
+@keyframes rz-orb-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+
+/* 球就是界面，所以「减少动态」让它停下来，而不是让它消失 */
+@media (prefers-reduced-motion: reduce) {
+  .rz-voice-orb .veil, .rz-voice-orb .sphere { animation: none !important; }
+  .rz-voice-orb.is-tapped .ping { animation: none; }
+  .rz-voice-orb, .rz-voice-orb .halo, .rz-voice-orb .sphere { transition: none; }
+}
+
+/* ── 现场传译 ──────────────────────────────────────────────────────────
+   同一台平板上的兄弟页面，共用语音顾问的外壳，配色同样原样保留。
+   两种语言用两个颜色分开，因为店员要在一米外扫一眼就知道这句是给谁听的。 */
+.rz-tolk { --tolk-fr: #6ea8fe; --tolk-nl: #7ee0a8; }
+/* 控制台改版后 stream 与 empty 只剩这一页在用，样式跟着搬过来自带 */
+.rz-tolk .rz-voice-stream { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 10px;
+  overflow-y: auto; padding: 18px 22px 24px; }
+.rz-tolk .rz-voice-empty { margin: auto; max-width: 300px; text-align: center;
+  color: var(--voice-faint); font-size: 13px; line-height: 1.7; }
+.rz-tolk-pair { border: 1px solid var(--voice-line); border-left-width: 3px; border-radius: 14px;
+  padding: 12px 14px; background: #171a1d; }
+.rz-tolk-pair.is-fr { border-left-color: var(--tolk-fr); }
+.rz-tolk-pair.is-nl { border-left-color: var(--tolk-nl); }
+.rz-tolk-pair.is-pending { border-left-color: var(--voice-line); }
+.rz-tolk-tag { display: inline-block; margin-bottom: 5px; padding: 1px 7px; border: 1px solid var(--voice-line);
+  border-radius: 999px; color: var(--voice-faint); font-size: 10px; letter-spacing: .1em; }
+.rz-tolk-pair.is-fr .rz-tolk-tag { color: var(--tolk-fr); }
+.rz-tolk-pair.is-nl .rz-tolk-tag { color: var(--tolk-nl); }
+.rz-tolk-src { color: var(--voice-faint); font-size: 14px; }
+/* 译文要大：店员是站着、隔着一段距离读它 */
+.rz-tolk-out { margin-top: 6px; font-size: 20px; font-weight: 600; line-height: 1.4; }
+.rz-tolk-pair.is-pending .rz-tolk-out { color: var(--voice-faint); font-weight: 400; }
+.rz-tolk-mic { width: 74px; height: 74px; border: 0; border-radius: 50%; cursor: pointer;
+  background: #2ecc71; color: #08320f; font-size: 28px; line-height: 1;
+  transition: background 150ms, transform 100ms; }
+.rz-tolk-mic:active { transform: scale(.95); }
+.rz-tolk-mic.is-on { background: #e74c3c; color: #fff; }
+
+/* 顾客扫码传照片。摆在会话流末尾，顾客要能隔着柜台扫到，所以码不能小 */
+.rz-voice-qr { flex: 0 0 auto; align-self: center; display: grid; justify-items: center; gap: 8px; padding: 14px; border-radius: 16px; background: #fff; box-shadow: 0 6px 24px rgba(31, 26, 21, 0.14); }
+.rz-voice-qr img { display: block; width: 220px; height: 220px; }
+.rz-voice-qr p { margin: 0; font-size: 13px; color: #6b5f52; text-align: center; }
+.rz-voice-qr button { border: 0; background: none; padding: 2px 8px; font-size: 12px; color: #9a8b7a; cursor: pointer; }
+
+/* 顾客自己手机上的上传页。整页只有一个按钮——他站在别人店里，多一步就会放弃 */
+.rz-phone-upload { min-height: 100dvh; display: grid; align-content: center; justify-items: center; gap: 14px; padding: 32px 24px; background: #faf7f2; color: #2c241c; font-family: var(--rz-font-body, system-ui, sans-serif); text-align: center; }
+.rz-phone-upload h1 { margin: 0; font-size: 22px; font-weight: 600; }
+.rz-phone-upload p { margin: 0; font-size: 15px; line-height: 1.5; color: #6b5f52; max-width: 22rem; }
+.rz-phone-upload-button { margin-top: 10px; min-width: 15rem; min-height: 56px; border: 0; border-radius: 14px; background: #2c241c; color: #faf7f2; font-size: 17px; font-weight: 600; cursor: pointer; }
+.rz-phone-upload-button:disabled { opacity: 0.55; }
+.rz-phone-upload-done { color: #3f6b4a; font-weight: 600; }
+.rz-phone-upload-bad { color: #a4453a; }

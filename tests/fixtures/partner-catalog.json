@@ -1,0 +1,152 @@
+[
+  {
+    "sku_id": "TEST-001",
+    "color_family": "warm",
+    "value_level": "light",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 5
+  },
+  {
+    "sku_id": "TEST-002",
+    "color_family": "warm",
+    "value_level": "light",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 15
+  },
+  {
+    "sku_id": "TEST-003",
+    "color_family": "warm",
+    "value_level": "medium",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 10
+  },
+  {
+    "sku_id": "TEST-004",
+    "color_family": "earth",
+    "value_level": "deep",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 10
+  },
+  {
+    "sku_id": "TEST-005",
+    "color_family": "pure_white",
+    "value_level": "very_light",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 1
+  },
+  {
+    "sku_id": "TEST-006",
+    "color_family": "gray",
+    "value_level": "light",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 2
+  },
+  {
+    "sku_id": "TEST-007",
+    "color_family": "gray",
+    "value_level": "medium",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 2
+  },
+  {
+    "sku_id": "TEST-008",
+    "color_family": "gray",
+    "value_level": "deep",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 2
+  },
+  {
+    "sku_id": "TEST-009",
+    "color_family": "black",
+    "value_level": "deep",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 1
+  },
+  {
+    "sku_id": "TEST-010",
+    "color_family": "sage",
+    "value_level": "medium",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 8
+  },
+  {
+    "sku_id": "TEST-011",
+    "color_family": "earth",
+    "value_level": "medium",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 12
+  },
+  {
+    "sku_id": "TEST-012",
+    "color_family": "cool",
+    "value_level": "light",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 5
+  },
+  {
+    "sku_id": "TEST-013",
+    "color_family": "green",
+    "value_level": "medium",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 20
+  },
+  {
+    "sku_id": "TEST-014",
+    "color_family": "blue",
+    "value_level": "medium",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 20
+  },
+  {
+    "sku_id": "TEST-015",
+    "color_family": "pink",
+    "value_level": "light",
+    "pattern_level": "solid",
+    "material_class": "blend",
+    "material_type": "main",
+    "weight_gsm": 300,
+    "color_chroma": 12
+  }
+]

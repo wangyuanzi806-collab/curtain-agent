@@ -1,0 +1,22 @@
+export type GenerationRecord = {
+  id: string;
+  status: string;
+  prompt: string;
+  userInstruction: string | null;
+  sceneR2Key: string | null;
+  curtainR2Key: string | null;
+  referenceR2Keys: string[];
+  resultImageUrl: string | null;
+  resultR2Key: string | null;
+  errorMessage: string | null;
+  providerModel: string;
+  agentRequestedModel: string | null;
+  agentUsedProvider: string | null;
+  agentUsedModel: string | null;
+  agentAttemptModels: string[];
+  recommendedSkuIds: string[];
+  selectedSkuId: string | null;
+  selectedSkuName: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
